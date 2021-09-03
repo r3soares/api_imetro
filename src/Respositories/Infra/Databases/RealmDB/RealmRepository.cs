@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace src.Respositories.Infra.Databases.RealmDB
 {
-    public abstract class RealmRepository<T> : IRepository<T>
+    class RealmRepository<T> : IRepository<T>
         where T : RealmObject
         
     {
@@ -15,8 +15,10 @@ namespace src.Respositories.Infra.Databases.RealmDB
         private Realm Database => Realm.GetInstance(_configuration);
         public RealmRepository(string databaseName, bool persist = true)
         {
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "Databases", databaseName);
-            _configuration = persist ? new RealmConfiguration(path) : new InMemoryConfiguration(path);
+            string folder = Path.Combine(Directory.GetCurrentDirectory(), "Databases");
+            string path = Path.Combine(folder, databaseName);
+            Directory.CreateDirectory(folder);
+            _configuration = persist ? new RealmConfiguration(path) : new InMemoryConfiguration(databaseName);
         }
 
         public object Delete(object id)

@@ -16,9 +16,9 @@ namespace src.Controllers.Vtr
     public class TanqueController : ControllerBase
     {
         private readonly ILogger<TanqueController> _logger;
-        private readonly IRepository<Tanque> _repo;
+        private readonly IVtrRepository<Tanque> _repo;
 
-        public TanqueController(IRepository<Tanque> repo, ILogger<TanqueController> logger)
+        public TanqueController(IVtrRepository<Tanque> repo, ILogger<TanqueController> logger)
         {
             _repo = repo;
             _logger = logger;
