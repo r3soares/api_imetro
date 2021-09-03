@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 
 namespace src.Respositories.Infra.Databases.RealmDB
 {
-    public class RealmRepository<T> 
-        where T : RealmObject,
-        IRepository<T>
+    public abstract class RealmRepository<T> : IRepository<T>
+        where T : RealmObject
+        
     {
-        private RealmConfiguration _configuration;
+        private RealmConfigurationBase _configuration;
         private Realm Database => Realm.GetInstance(_configuration);
-        public RealmRepository(IConnection connection)
+        public RealmRepository(string databaseName, bool persist = true)
         {
-            _configuration = new RealmConfiguration(connection.ConnectionString);
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "Databases", databaseName);
+            _configuration = persist ? new RealmConfiguration(path) : new InMemoryConfiguration(path);
         }
 
         public object Delete(object id)

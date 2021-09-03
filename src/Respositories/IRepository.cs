@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace src.Respositories
 {
-    public interface IRepository<T> where T:class
+    public interface IRepository<T>
     { 
         public T GetById(object id);
         public IList<T> GetAll();

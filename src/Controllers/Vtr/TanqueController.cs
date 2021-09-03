@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using src.Domain.Models.Vtr;
+using src.Respositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,11 @@ namespace src.Controllers.Vtr
     public class TanqueController : ControllerBase
     {
         private readonly ILogger<TanqueController> _logger;
+        private readonly IRepository<Tanque> _repo;
 
-        public TanqueController(ILogger<TanqueController> logger)
+        public TanqueController(IRepository<Tanque> repo, ILogger<TanqueController> logger)
         {
+            _repo = repo;
             _logger = logger;
         }
 
@@ -26,32 +29,35 @@ namespace src.Controllers.Vtr
         [HttpGet]
         public IEnumerable<Tanque> Get()
         {
-            return null;
+            return _repo.GetAll();
         }
 
         // GET api/<TanqueController>/5
         [HttpGet("{id}")]
         public Tanque Get(int id)
         {
-            return null;
+            return _repo.GetById(id);
         }
 
         // POST api/<TanqueController>
         [HttpPost]
         public void Post([FromBody] Tanque value)
         {
+            _repo.Save(value);
         }
 
-        // PUT api/<TanqueController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Tanque value)
+        // PUT api/<TanqueController>
+        [HttpPut]
+        public void Put([FromBody] Tanque value)
         {
+            _repo.Update(value);
         }
 
         // DELETE api/<TanqueController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _repo.Delete(id);
         }
     }
 }
