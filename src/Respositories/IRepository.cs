@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace src.Respositories
 {
-    public interface IRepository
+    public interface IRepository<T> where T:class
     { 
-        public IDatabase Database { get; init; }
+        public T GetById(object id);
+        public IList<T> GetAll();
+        public object Save(T data);
+        public object Update(T data);
+        public object Delete(object id);
     }
 }
