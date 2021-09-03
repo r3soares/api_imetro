@@ -1,4 +1,5 @@
 using Realms;
+using System;
 
 namespace src.Domain.Models.Vtr
 {
@@ -6,6 +7,9 @@ namespace src.Domain.Models.Vtr
     {
         [PrimaryKey]
         public string Id { get; set; } = System.Guid.NewGuid().ToString();
+        public int Tanque { get; set; }
+        public DateTimeOffset DataCalculo { get; set; }
+        public double Custo { get; set; }
     }
 
 }

@@ -24,7 +24,7 @@ namespace src.Controllers.Vtr
 
         // GET: api/<TanqueAgendadoController>
         [HttpGet]
-        public IEnumerable<TanqueAgendado> Get()
+        public IEnumerable<AgendaTanque> Get()
         {
             return null;
         }
@@ -38,13 +38,13 @@ namespace src.Controllers.Vtr
 
         // POST api/<TanqueAgendadoController>
         [HttpPost]
-        public void Post([FromBody] TanqueAgendado value)
+        public void Post([FromBody] AgendaTanque value)
         {
         }
 
         // PUT api/<TanqueAgendadoController>/5
         [HttpPut("{id}")]
-        public void Put(string id, [FromBody] TanqueAgendado value)
+        public void Put(string id, [FromBody] AgendaTanque value)
         {
         }
 
