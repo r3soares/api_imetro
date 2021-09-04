@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace src.Respositories.Infra.Databases.RealmDB
 {
-    class RealmRepository<T> : IRepository<T>
+    class RealmDatabase<T> : IRepository<T>
         where T : RealmObject
         
     {
         private RealmConfigurationBase _configuration;
         private Realm Database => Realm.GetInstance(_configuration);
-        public RealmRepository(string databaseName, bool persist = true)
+        public RealmDatabase(string databaseName, bool persist = true)
         {
             string folder = Path.Combine(Directory.GetCurrentDirectory(), "Databases");
             string path = Path.Combine(folder, databaseName);

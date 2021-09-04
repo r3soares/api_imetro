@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using src.Domain.Models.Vtr;
+using src.Respositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,46 +13,50 @@ namespace src.Controllers.Vtr
 {
     [Route("api/vtr/[controller]")]
     [ApiController]
-    public class TanqueAgendadoController : ControllerBase
+    public class TanqueAgendaController : ControllerBase
     {
+        private readonly IVtrRepository<TanqueAgenda> _repo;
+        private readonly ILogger<TanqueAgendaController> _logger;
 
-        private readonly ILogger<TanqueAgendadoController> _logger;
-
-        public TanqueAgendadoController(ILogger<TanqueAgendadoController> logger)
+        public TanqueAgendaController(IVtrRepository<TanqueAgenda> repo, ILogger<TanqueAgendaController> logger)
         {
+            _repo = repo;
             _logger = logger;
         }
 
         // GET: api/<TanqueAgendadoController>
         [HttpGet]
-        public IEnumerable<AgendaTanque> Get()
+        public IEnumerable<TanqueAgenda> Get()
         {
-            return null;
+            return _repo.GetAll();
         }
 
         // GET api/<TanqueAgendadoController>/5
         [HttpGet("{id}")]
-        public string Get(string id)
+        public TanqueAgenda Get(object id)
         {
-            return "value";
+            return _repo.GetById(id);
         }
 
         // POST api/<TanqueAgendadoController>
         [HttpPost]
-        public void Post([FromBody] AgendaTanque value)
+        public void Post([FromBody] TanqueAgenda value)
         {
+            _repo.Save(value);
         }
 
-        // PUT api/<TanqueAgendadoController>/5
-        [HttpPut("{id}")]
-        public void Put(string id, [FromBody] AgendaTanque value)
+        // PUT api/<TanqueAgendadoController>
+        [HttpPut]
+        public void Put([FromBody] TanqueAgenda value)
         {
+            _repo.Update(value);
         }
 
         // DELETE api/<TanqueAgendadoController>/5
         [HttpDelete("{id}")]
-        public void Delete(string id)
+        public void Delete(object id)
         {
+            _repo.Delete(id);
         }
     }
 }

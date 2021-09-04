@@ -12,7 +12,7 @@ namespace src.Respositories.Infra.Databases.RealmDB
         private IRepository<T> _repository;
         public VtrRepository()
         {
-            _repository = new RealmRepository<T>("vtr.realm", false);
+            _repository = new RealmDatabase<T>("vtr.realm", false);
         }
 
         public object Delete(object id)

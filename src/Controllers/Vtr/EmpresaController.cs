@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using src.Domain.Models.Vtr;
+using src.Respositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,12 @@ namespace src.Controllers.Vtr
     [ApiController]
     public class EmpresaController : ControllerBase
     {
-
+        private readonly IVtrRepository<Empresa> _repo;
         private readonly ILogger<EmpresaController> _logger;
 
-        public EmpresaController(ILogger<EmpresaController> logger)
+        public EmpresaController(IVtrRepository<Empresa> repo, ILogger<EmpresaController> logger)
         {
+            _repo = repo;
             _logger = logger;
         }
 
@@ -26,32 +28,35 @@ namespace src.Controllers.Vtr
         [HttpGet]
         public IEnumerable<Empresa> Get()
         {
-            return null;
+            return _repo.GetAll();
         }
 
         // GET api/<EmpresaController>/5
         [HttpGet("{id}")]
-        public Empresa Get(int id)
+        public Empresa Get(object id)
         {
-            return null;
+            return _repo.GetById(id);
         }
 
         // POST api/<EmpresaController>
         [HttpPost]
         public void Post([FromBody] Empresa value)
         {
+            _repo.Save(value);
         }
 
-        // PUT api/<EmpresaController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Empresa value)
+        // PUT api/<EmpresaController>
+        [HttpPut]
+        public void Put([FromBody] Empresa value)
         {
+            _repo.Update(value);
         }
 
         // DELETE api/<EmpresaController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(object id)
         {
+            _repo.Delete(id);
         }
     }
 }
