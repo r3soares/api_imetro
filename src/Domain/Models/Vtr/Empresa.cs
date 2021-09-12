@@ -19,8 +19,6 @@ namespace src.Domain.Models.Vtr
         [JsonProperty]
         public string Email { get; set; }
         [JsonProperty]
-        public IList<string> TanquesAgendados { get; }
-        [JsonProperty]
         public int Status { get; set; }
     }
 

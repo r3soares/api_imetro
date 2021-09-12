@@ -9,10 +9,11 @@ namespace src.Respositories.Infra.Databases.RealmDB
     public class VtrRepository<T> : IVtrRepository<T>
         where T : RealmObject 
     {
+        static readonly bool PERSISTENCIA_BANCO = false;
         private IRepository<T> _repository;
         public VtrRepository()
         {
-            _repository = new RealmDatabase<T>("vtr.realm", false);
+            _repository = new RealmDatabase<T>("vtr.realm", PERSISTENCIA_BANCO);
         }
 
         public object Delete(object id)

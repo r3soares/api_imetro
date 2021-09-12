@@ -9,9 +9,9 @@ namespace src.Domain.Models.Vtr
     {
         [JsonProperty]
         [PrimaryKey]
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string Id { get; private set; }
         [JsonProperty]
-        public string Agenda { get; set; }
+        public DateTimeOffset Agenda { get; set; }
         [JsonProperty]
         public int Tanque { get; set; }
         [JsonProperty]
@@ -20,6 +20,15 @@ namespace src.Domain.Models.Vtr
         public int StatusPagamento { get; set; }
         [JsonProperty]
         public string Responsavel { get; set; }
+        [JsonProperty]
+        public double CustoVerificacao { get; set; }
+        [JsonProperty]
+        public int TempoVerificacao { get; set; } //Em minutos
+
+        public void GeraKey()
+        {
+            Id = Tanque + Agenda.ToString("ddMMyyyy");
+        }
     }
 
 }

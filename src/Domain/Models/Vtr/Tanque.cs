@@ -27,7 +27,7 @@ namespace src.Domain.Models.Vtr
         [JsonProperty]
         public int Status { get; set; }
         [JsonProperty]
-        public IList<CustoTanque> HistoricoCustos { get; set; }
+        public IList<CustoTanque> HistoricoCustos { get; }
         [JsonProperty]
         public IList<string> LinkDocs { get;}
     }
