@@ -42,6 +42,7 @@ namespace src.Controllers.Vtr
         [HttpPost]
         public void Post([FromBody] TanqueAgenda value)
         {
+            value.GeraKey();
             _repo.Save(value);
         }
 
@@ -49,6 +50,7 @@ namespace src.Controllers.Vtr
         [HttpPut]
         public void Put([FromBody] TanqueAgenda value)
         {
+            value.GeraKey();
             _repo.Update(value);
         }
 
