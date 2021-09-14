@@ -17,17 +17,17 @@ namespace src.Domain.Models.Vtr
         [JsonProperty]
         public IList<Compartimento> Compartimentos { get; }
         [JsonProperty]
-        public int Proprietario { get; set; }
+        public Proprietario Proprietario { get; set; }
         [JsonProperty]
         public DateTimeOffset DataRegistro { get; set; }
         [JsonProperty]
         public DateTimeOffset DataUltimaAlteracao { get; set; }
         [JsonProperty]
-        public string AgendaTanque { get; set; }
+        public TanqueAgenda TanqueAgendado { get; set; }
         [JsonProperty]
         public int Status { get; set; }
         [JsonProperty]
-        public IList<CustoTanque> HistoricoCustos { get; }
+        public double Custo { get; set; }
         [JsonProperty]
         public IList<string> LinkDocs { get;}
     }

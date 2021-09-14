@@ -11,9 +11,9 @@ namespace src.Domain.Models.Vtr
     {
         [JsonProperty]
         [PrimaryKey]
-        public string Data { get; set; } //DD/MM/YYYY
+        public DateTimeOffset Data { get; set; } //DD/MM/YYYY
         [JsonProperty]
-        public IList<string> TanquesAgendados { get;}
+        public IList<TanqueAgenda> TanquesAgendados { get;}
         [JsonProperty]
         public int Status { get; set; }
     }

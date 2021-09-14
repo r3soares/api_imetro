@@ -11,7 +11,7 @@ namespace src.Domain.Models.Vtr
         [PrimaryKey]
         public string Cnpj { get; set; }
         [JsonProperty]
-        public int CodProprietario { get; set; }
+        public Proprietario Proprietario { get; set; }
         [JsonProperty]
         public string Nome { get; set; }
         [JsonProperty]

@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using Realms;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace src.Domain.Models.Vtr
 {
@@ -10,10 +11,16 @@ namespace src.Domain.Models.Vtr
         [JsonProperty]
         [PrimaryKey]
         public int CodProprietario { get; set; }
+
         [JsonProperty]
         public int CodMunicipio { get; set; }
+
         [JsonProperty]
-        public IList<int> Tanques { get;}
+        public Empresa Empresa { get; set; }
+
+        [JsonProperty]
+        [Backlink(nameof(Tanque.Proprietario))]
+        public IQueryable<Tanque> Tanques { get;}
     }
 
 }
