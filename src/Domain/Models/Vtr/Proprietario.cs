@@ -10,7 +10,7 @@ namespace src.Domain.Models.Vtr
     {
         [JsonProperty]
         [PrimaryKey]
-        public int CodProprietario { get; set; }
+        public int Cod { get; set; }
 
         [JsonProperty]
         public int CodMunicipio { get; set; }

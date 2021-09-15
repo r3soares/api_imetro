@@ -15,10 +15,10 @@ namespace src.Controllers.Vtr
     [ApiController]
     public class AgendaController : ControllerBase
     {
-        private readonly IVtrRepository<Agenda> _repo;
+        private readonly IVtrRepository<AgendaDoDia> _repo;
         private readonly ILogger<AgendaController> _logger;
 
-        public AgendaController(IVtrRepository<Agenda> repo, ILogger<AgendaController> logger)
+        public AgendaController(IVtrRepository<AgendaDoDia> repo, ILogger<AgendaController> logger)
         {
             _repo = repo;
             _logger = logger;
@@ -26,28 +26,28 @@ namespace src.Controllers.Vtr
 
         // GET: api/<AgendaController>
         [HttpGet]
-        public IEnumerable<Agenda> Get()
+        public IEnumerable<AgendaDoDia> Get()
         {
             return _repo.GetAll();
         }
 
         // GET api/<AgendaController>/5
         [HttpGet("{id}")]
-        public Agenda Get(object id)
+        public AgendaDoDia Get(object id)
         {
             return _repo.GetById(id);
         }
 
         // POST api/<AgendaController>
         [HttpPost]
-        public void Post([FromBody] Agenda value)
+        public void Post([FromBody] AgendaDoDia value)
         {
             _repo.Save(value);
         }
 
         // PUT api/<AgendaController>
         [HttpPut]
-        public void Put([FromBody] Agenda value)
+        public void Put([FromBody] AgendaDoDia value)
         {
             _repo.Update(value);
         }

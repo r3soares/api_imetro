@@ -15,9 +15,9 @@ namespace src.Domain.Models.Vtr
         [JsonProperty]
         public string Nome { get; set; }
         [JsonProperty]
-        public string Telefone { get; set; }
+        public List<string> Telefone { get;}
         [JsonProperty]
-        public string Email { get; set; }
+        public List<string> Email { get;}
         [JsonProperty]
         public int Status { get; set; }
     }

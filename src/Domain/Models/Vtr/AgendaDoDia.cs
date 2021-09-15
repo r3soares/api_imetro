@@ -7,13 +7,14 @@ using System.Collections.Generic;
 namespace src.Domain.Models.Vtr
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class Agenda : RealmObject
+    public class AgendaDoDia : RealmObject
     {
         [JsonProperty]
         [PrimaryKey]
         public DateTimeOffset Data { get; set; } //DD/MM/YYYY
         [JsonProperty]
-        public IList<TanqueAgenda> TanquesAgendados { get;}
+        [Backlink(nameof(AgendaDoTanque.Agenda))]
+        public IList<AgendaDoTanque> TanquesAgendados { get;}
         [JsonProperty]
         public int Status { get; set; }
     }

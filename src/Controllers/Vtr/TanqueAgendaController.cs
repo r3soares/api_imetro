@@ -15,10 +15,10 @@ namespace src.Controllers.Vtr
     [ApiController]
     public class TanqueAgendaController : ControllerBase
     {
-        private readonly IVtrRepository<TanqueAgenda> _repo;
+        private readonly IVtrRepository<AgendaDoTanque> _repo;
         private readonly ILogger<TanqueAgendaController> _logger;
 
-        public TanqueAgendaController(IVtrRepository<TanqueAgenda> repo, ILogger<TanqueAgendaController> logger)
+        public TanqueAgendaController(IVtrRepository<AgendaDoTanque> repo, ILogger<TanqueAgendaController> logger)
         {
             _repo = repo;
             _logger = logger;
@@ -26,28 +26,28 @@ namespace src.Controllers.Vtr
 
         // GET: api/<TanqueAgendadoController>
         [HttpGet]
-        public IEnumerable<TanqueAgenda> Get()
+        public IEnumerable<AgendaDoTanque> Get()
         {
             return _repo.GetAll();
         }
 
         // GET api/<TanqueAgendadoController>/5
         [HttpGet("{id}")]
-        public TanqueAgenda Get(object id)
+        public AgendaDoTanque Get(object id)
         {
             return _repo.GetById(id);
         }
 
         // POST api/<TanqueAgendadoController>
         [HttpPost]
-        public void Post([FromBody] TanqueAgenda value)
+        public void Post([FromBody] AgendaDoTanque value)
         {
             _repo.Save(value);
         }
 
         // PUT api/<TanqueAgendadoController>
         [HttpPut]
-        public void Put([FromBody] TanqueAgenda value)
+        public void Put([FromBody] AgendaDoTanque value)
         {
             _repo.Update(value);
         }

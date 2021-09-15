@@ -5,20 +5,20 @@ using System;
 namespace src.Domain.Models.Vtr
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class TanqueAgenda : Realms.RealmObject
+    public class AgendaDoTanque : Realms.RealmObject
     {
         [JsonProperty]
         [PrimaryKey]
-        public string Id { get; private set; } = Guid.NewGuid().ToString();
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         /// <summary>
         /// Se houver bitrem, o mesmo será associado a agenda do outro veículo
         /// </summary>
         [JsonProperty]
-        public TanqueAgenda BitremAgenda { get; set; }
+        public AgendaDoTanque BitremAgenda { get; set; }
 
         [JsonProperty]
-        public DateTimeOffset Agenda { get; set; }
+        public AgendaDoDia Agenda { get; set; }
 
         [JsonProperty]
         public int Tanque { get; set; }

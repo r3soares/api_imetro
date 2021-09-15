@@ -43,6 +43,7 @@ namespace src.Controllers.Vtr
         [HttpPost]
         public void Post([FromBody] Tanque value)
         {
+            value.DataRegistro = DateTimeOffset.Now;
             _repo.Save(value);
         }
 
@@ -50,6 +51,7 @@ namespace src.Controllers.Vtr
         [HttpPut]
         public void Put([FromBody] Tanque value)
         {
+            value.DataUltimaAlteracao = DateTimeOffset.Now;
             _repo.Update(value);
         }
 
