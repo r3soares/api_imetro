@@ -34,7 +34,7 @@ namespace src.Controllers.Vtr
 
         // GET api/<TanqueController>/5
         [HttpGet("{id}")]
-        public Tanque Get(int id)
+        public Tanque Get(string id)
         {
             return _repo.GetById(id);
         }

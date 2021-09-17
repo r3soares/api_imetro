@@ -6,7 +6,11 @@ namespace src.Domain.Models.Vtr
     public class Compartimento : Realms.EmbeddedObject
     {
         [JsonProperty]
-        public int Capacidade { get; set; }
+        public int Pos { get; set; }
+
+        [JsonProperty]
+        public int Cap { get; set; }
+
         [JsonProperty]
         public int Setas { get; set; }
     }

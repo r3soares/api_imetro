@@ -33,7 +33,7 @@ namespace src.Controllers.Vtr
 
         // GET api/<EmpresaController>/5
         [HttpGet("{id}")]
-        public Empresa Get(object id)
+        public Empresa Get(string id)
         {
             return _repo.GetById(id);
         }

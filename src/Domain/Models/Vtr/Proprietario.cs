@@ -13,14 +13,11 @@ namespace src.Domain.Models.Vtr
         public int Cod { get; set; }
 
         [JsonProperty]
-        public int CodMunicipio { get; set; }
+        public int CodMun { get; set; }
 
         [JsonProperty]
-        public Empresa Empresa { get; set; }
+        public IList<string> Tanques { get;}
 
-        [JsonProperty]
-        [Backlink(nameof(Tanque.Proprietario))]
-        public IQueryable<Tanque> Tanques { get;}
     }
 
 }

@@ -3,6 +3,7 @@ using Realms;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace src.Domain.Models.Vtr
 {
@@ -11,10 +12,10 @@ namespace src.Domain.Models.Vtr
     {
         [JsonProperty]
         [PrimaryKey]
-        public DateTimeOffset Data { get; set; } //DD/MM/YYYY
+        public long Data { get; set; } //DD/MM/YYYY
         [JsonProperty]
         [Backlink(nameof(AgendaDoTanque.Agenda))]
-        public IList<AgendaDoTanque> TanquesAgendados { get;}
+        public IQueryable<AgendaDoTanque> TanquesAgendados { get;}
         [JsonProperty]
         public int Status { get; set; }
     }
