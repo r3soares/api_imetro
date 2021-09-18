@@ -33,12 +33,12 @@ namespace src
         {
             services.AddControllers()
                 .AddNewtonsoftJson();
-            var validator = services.FirstOrDefault(s => s.ServiceType == typeof(IObjectModelValidator));
-            if (validator != null)
-            {
-                services.Remove(validator);
-                services.Add(new ServiceDescriptor(typeof(IObjectModelValidator), _ => new NonValidatingValidator(), ServiceLifetime.Singleton));
-            }
+            //var validator = services.FirstOrDefault(s => s.ServiceType == typeof(IObjectModelValidator));
+            //if (validator != null)
+            //{
+            //    services.Remove(validator);
+            //    services.Add(new ServiceDescriptor(typeof(IObjectModelValidator), _ => new NonValidatingValidator(), ServiceLifetime.Singleton));
+            //}
             services.AddSingleton(typeof(IVtrRepository<>),typeof(VtrRepository<>));
         }
 
@@ -59,6 +59,9 @@ namespace src
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

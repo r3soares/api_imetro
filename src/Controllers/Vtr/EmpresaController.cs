@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using src.Domain.Models.Vtr;
 using src.Respositories;
@@ -13,7 +15,7 @@ namespace src.Controllers.Vtr
 {
     [Route("api/vtr/[controller]")]
     [ApiController]
-    public class EmpresaController : ControllerBase
+    public class EmpresaController : Controller
     {
         private readonly IVtrRepository<Empresa> _repo;
         private readonly ILogger<EmpresaController> _logger;
@@ -24,6 +26,11 @@ namespace src.Controllers.Vtr
             _logger = logger;
         }
 
+        public override void OnActionExecuted(ActionExecutedContext context)
+        {
+            base.OnActionExecuted(context);
+        }
+
         // GET: api/<EmpresaController>
         [HttpGet]
         public IEnumerable<Empresa> Get()
@@ -32,10 +39,11 @@ namespace src.Controllers.Vtr
         }
 
         // GET api/<EmpresaController>/5
-        [HttpGet("{id}")]
-        public Empresa Get(string id)
+        [HttpGet("{cnpj}")]
+        public IActionResult Get(string cnpj)
         {
-            return _repo.GetById(id);
+            var e = _repo.GetById(cnpj);
+            return e != null ? Ok(e) : NotFound();
         }
 
         // POST api/<EmpresaController>

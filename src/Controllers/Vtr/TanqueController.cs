@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using src.Domain.Models.Vtr;
 using src.Respositories;
@@ -34,9 +35,12 @@ namespace src.Controllers.Vtr
 
         // GET api/<TanqueController>/5
         [HttpGet("{id}")]
-        public Tanque Get(string id)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Tanque))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult Get(string id)
         {
-            return _repo.GetById(id);
+            var t = _repo.GetById(id);
+            return t != null ? Ok(t) : NotFound();
         }
 
         // POST api/<TanqueController>

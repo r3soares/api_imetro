@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using Realms;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace src.Domain.Models.Vtr
 {
