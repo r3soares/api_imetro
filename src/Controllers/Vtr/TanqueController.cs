@@ -28,9 +28,10 @@ namespace src.Controllers.Vtr
 
         // GET: api/<TanqueController>
         [HttpGet]
-        public async Task<IEnumerable<Tanque>> Get()
+        public async Task<IActionResult> Get()
         {
-            return await _repo.GetAll();
+            var result = await _repo.GetAll();
+            return result.Any() ? Ok(result) : new EmptyResult();
         }
 
         // GET api/<TanqueController>/5
@@ -50,23 +51,26 @@ namespace src.Controllers.Vtr
 
         // POST api/<TanqueController>
         [HttpPost]
-        public async Task Post([FromBody] Tanque value)
+        public async Task<IActionResult> Post([FromBody] Tanque value)
         {
-            await _repo.Save(value);
+            bool result = (bool)await _repo.Save(value);
+            return result == true ? Accepted() : StatusCode(500);
         }
 
         // PUT api/<TanqueController>
         [HttpPut]
-        public async Task Put([FromBody] Tanque value)
+        public async Task<IActionResult> Put([FromBody] Tanque value)
         {
-            await _repo.Update(value);
+            bool result = (bool)await _repo.Update(value);
+            return result == true ? Accepted() : StatusCode(500);
         }
 
         // DELETE api/<TanqueController>/5
         [HttpDelete("{id}")]
-        public async Task Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            await _repo.Delete(id);
+            bool result = (bool)await _repo.Delete(id);
+            return result == true ? Accepted() : StatusCode(500);
         }
     }
 }

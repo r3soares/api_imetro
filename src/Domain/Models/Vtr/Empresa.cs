@@ -10,6 +10,7 @@ namespace src.Domain.Models.Vtr
     {
         [JsonProperty]
         [PrimaryKey]
+        [Realms.Required]
         public string Cnpj { get; set; }
         [JsonProperty]
         public Proprietario Proprietario { get; set; }

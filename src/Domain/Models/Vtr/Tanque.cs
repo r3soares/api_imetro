@@ -9,7 +9,8 @@ namespace src.Domain.Models.Vtr
     public class Tanque : RealmObject
     {
         [JsonProperty]
-        [PrimaryKey]
+        [PrimaryKey] 
+        [Required]
         public string CodInmetro { get; set; }
         [JsonProperty]
         [Indexed]
