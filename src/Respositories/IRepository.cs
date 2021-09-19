@@ -9,10 +9,10 @@ namespace src.Respositories
 {
     public interface IRepository<T>
     { 
-        public T GetById(object id);
-        public IList<T> GetAll();
-        public object Save(T data);
-        public object Update(T data);
-        public object Delete(object id);
+        public Task<T> GetById(object id);
+        public Task<IQueryable<T>> GetAll();
+        public Task<object> Save(T data);
+        public Task<object> Update(T data);
+        public Task<object> Delete(object id);
     }
 }

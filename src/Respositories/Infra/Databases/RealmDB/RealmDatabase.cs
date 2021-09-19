@@ -12,7 +12,7 @@ namespace src.Respositories.Infra.Databases.RealmDB
         
     {
         private RealmConfigurationBase _configuration;
-        private Realm Database => Realm.GetInstance(_configuration);
+        private async Task<Realm> Database() { return await Realm.GetInstanceAsync(_configuration); }
         public RealmDatabase(string databaseName, bool persist = true)
         {
             string folder = Path.Combine(Directory.GetCurrentDirectory(), "Databases");
@@ -21,12 +21,12 @@ namespace src.Respositories.Infra.Databases.RealmDB
             _configuration = persist ? new RealmConfiguration(path) : new InMemoryConfiguration(databaseName);
         }
 
-        public object Delete(object id)
+        public async Task<object> Delete(object id)
         {
-            var data = GetById(id);
+            var data = await GetById(id);
             try
             {
-                Database.Remove(data);
+                (await Database()).Remove(data);
                 return true;
             }
             catch
@@ -36,26 +36,26 @@ namespace src.Respositories.Infra.Databases.RealmDB
             
         }
 
-        public IList<T> GetAll()
+        public async Task<IQueryable<T>> GetAll()
         {
-            return Database.All<T>().ToList();
+            return (await Database()).All<T>();
         }
 
-        public T GetById(object id) => id switch
+        public async Task<T> GetById(object id) => id switch
         {
-            long d      => Database.Find<T>(d),
-            int d       => Database.Find<T>(d),
-            string d    => Database.Find<T>(d),
-            Guid d      => Database.Find<T>(d),
+            long d      => (await Database()).Find<T>(d),
+            int d       => (await Database()).Find<T>(d),
+            string d    => (await Database()).Find<T>(d),
+            Guid d      => (await Database()).Find<T>(d),
             _ => null
         };
 
-        public object Save(T data)
+        public async Task<object> Save(T data)
         {
-            var realm = Database;
+            var realm = await Database();
             try
             {
-                realm.Write(() => realm.Add(data, false));
+                await realm.WriteAsync((r) => r.Add(data, false));
                 return true;
             }
             catch
@@ -66,12 +66,12 @@ namespace src.Respositories.Infra.Databases.RealmDB
             
         }
 
-        public object Update(T data)
+        public async Task<object> Update(T data)
         {
-            var realm = Database;
+            var realm = await Database();
             try
             {
-                realm.Write(() => realm.Add(data, true));
+                await realm.WriteAsync((r) => r.Add(data, true));
                 return true;
             }
             catch

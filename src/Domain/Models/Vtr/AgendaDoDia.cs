@@ -14,8 +14,7 @@ namespace src.Domain.Models.Vtr
         [PrimaryKey]
         public long Data { get; set; } //DD/MM/YYYY
         [JsonProperty]
-        [Backlink(nameof(AgendaDoTanque.Agenda))]
-        public IQueryable<AgendaDoTanque> TanquesAgendados { get;}
+        public IList<string> TanquesAgendados { get;}
         [JsonProperty]
         public int Status { get; set; }
     }

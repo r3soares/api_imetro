@@ -33,38 +33,38 @@ namespace src.Controllers.Vtr
 
         // GET: api/<EmpresaController>
         [HttpGet]
-        public IEnumerable<Empresa> Get()
+        public async Task<IEnumerable<Empresa>> Get()
         {
-            return _repo.GetAll();
+            return await _repo.GetAll();
         }
 
         // GET api/<EmpresaController>/5
         [HttpGet("{cnpj}")]
-        public IActionResult Get(string cnpj)
+        public async Task<IActionResult> Get(string cnpj)
         {
-            var e = _repo.GetById(cnpj);
+            var e = await _repo.GetById(cnpj);
             return e != null ? Ok(e) : NotFound();
         }
 
         // POST api/<EmpresaController>
         [HttpPost]
-        public void Post([FromBody] Empresa value)
+        public async Task Post([FromBody] Empresa value)
         {
-            _repo.Save(value);
+            await _repo.Save(value);
         }
 
         // PUT api/<EmpresaController>
         [HttpPut]
-        public void Put([FromBody] Empresa value)
+        public async Task Put([FromBody] Empresa value)
         {
-            _repo.Update(value);
+            await _repo.Update(value);
         }
 
         // DELETE api/<EmpresaController>/5
         [HttpDelete("{id}")]
-        public void Delete(object id)
+        public async Task Delete(object id)
         {
-            _repo.Delete(id);
+            await _repo.Delete(id);
         }
     }
 }

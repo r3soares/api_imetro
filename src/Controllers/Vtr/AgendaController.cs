@@ -26,37 +26,37 @@ namespace src.Controllers.Vtr
 
         // GET: api/<AgendaController>
         [HttpGet]
-        public IEnumerable<AgendaDoDia> Get()
+        public async Task<IEnumerable<AgendaDoDia>> Get()
         {
-            return _repo.GetAll();
+            return await _repo.GetAll();
         }
 
         // GET api/<AgendaController>/5
         [HttpGet("{id}")]
-        public AgendaDoDia Get(object id)
+        public async Task<AgendaDoDia> Get(object id)
         {
-            return _repo.GetById(id);
+            return await _repo.GetById(id);
         }
 
         // POST api/<AgendaController>
         [HttpPost]
-        public void Post([FromBody] AgendaDoDia value)
+        public async Task Post([FromBody] AgendaDoDia value)
         {
-            _repo.Save(value);
+            await _repo.Save(value);
         }
 
         // PUT api/<AgendaController>
         [HttpPut]
-        public void Put([FromBody] AgendaDoDia value)
+        public async Task Put([FromBody] AgendaDoDia value)
         {
-            _repo.Update(value);
+            await _repo.Update(value);
         }
 
         // DELETE api/<AgendaController>/5
         [HttpDelete("{id}")]
-        public void Delete(object id)
+        public async Task Delete(object id)
         {
-            _repo.Delete(id);
+            await _repo.Delete(id);
         }
     }
 }

@@ -28,42 +28,45 @@ namespace src.Controllers.Vtr
 
         // GET: api/<TanqueController>
         [HttpGet]
-        public IEnumerable<Tanque> Get()
+        public async Task<IEnumerable<Tanque>> Get()
         {
-            return _repo.GetAll();
+            return await _repo.GetAll();
         }
 
         // GET api/<TanqueController>/5
-        [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Tanque))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Get(string id)
+        [HttpGet("{inmetro}")]
+        public async Task<IActionResult> Get(string id)
         {
-            var t = _repo.GetById(id);
+            var t = await _repo.GetById(id);
+            return t != null ? Ok(t) : NotFound();
+        }
+
+        [HttpGet("placa/{placa}")]
+        public async Task<IActionResult> GetByPlaca(string placa)
+        {
+            var t = (await _repo.GetAll()).FirstOrDefault(tanque => tanque.Placa.Equals(placa));
             return t != null ? Ok(t) : NotFound();
         }
 
         // POST api/<TanqueController>
         [HttpPost]
-        public void Post([FromBody] Tanque value)
+        public async Task Post([FromBody] Tanque value)
         {
-            value.DataRegistro = DateTimeOffset.Now;
-            _repo.Save(value);
+            await _repo.Save(value);
         }
 
         // PUT api/<TanqueController>
         [HttpPut]
-        public void Put([FromBody] Tanque value)
+        public async Task Put([FromBody] Tanque value)
         {
-            value.DataUltimaAlteracao = DateTimeOffset.Now;
-            _repo.Update(value);
+            await _repo.Update(value);
         }
 
         // DELETE api/<TanqueController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            _repo.Delete(id);
+            await _repo.Delete(id);
         }
     }
 }

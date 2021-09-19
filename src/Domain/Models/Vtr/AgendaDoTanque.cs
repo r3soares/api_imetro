@@ -17,8 +17,11 @@ namespace src.Domain.Models.Vtr
         [JsonProperty]
         public AgendaDoTanque BitremAgenda { get; set; }
 
+        /// <summary>
+        /// Agenda do dia
+        /// </summary>
         [JsonProperty]
-        public AgendaDoDia Agenda { get; set; }
+        public long TanqueAgendado { get; set; }
 
         [JsonProperty]
         public int Tanque { get; set; }

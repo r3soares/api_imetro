@@ -16,29 +16,29 @@ namespace src.Respositories.Infra.Databases.RealmDB
             _repository = new RealmDatabase<T>("vtr.realm", PERSISTENCIA_BANCO);
         }
 
-        public object Delete(object id)
+        public async Task<object> Delete(object id)
         {
-            return _repository.Delete(id);
+            return await _repository.Delete(id);
         }
 
-        public IList<T> GetAll()
+        public async Task<IQueryable<T>> GetAll()
         {
-            return _repository.GetAll();
+            return await _repository.GetAll();
         }
 
-        public T GetById(object id)
+        public async Task<T> GetById(object id)
         {
-            return _repository.GetById(id);
+            return await _repository.GetById(id);
         }
 
-        public object Save(T data)
+        public async Task<object> Save(T data)
         {
-            return _repository.Save(data);
+            return await _repository.Save(data);
         }
 
-        public object Update(T data)
+        public async Task<object> Update(T data)
         {
-            return _repository.Update(data);
+            return await _repository.Update(data);
         }
     }
 }
