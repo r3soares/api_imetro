@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -12,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using src.Domain.Models.Vtr;
 using src.Respositories;
 using src.Respositories.Infra.Databases.RealmDB;
@@ -32,7 +35,12 @@ namespace src
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers()
-                .AddNewtonsoftJson();
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.MetadataPropertyHandling = MetadataPropertyHandling.Ignore;
+                    options.SerializerSettings.DateParseHandling = DateParseHandling.None;
+                    options.SerializerSettings.Converters.Add(new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal});
+                });
             //var validator = services.FirstOrDefault(s => s.ServiceType == typeof(IObjectModelValidator));
             //if (validator != null)
             //{

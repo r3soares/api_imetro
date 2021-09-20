@@ -55,7 +55,7 @@ namespace src.Respositories.Infra.Databases.RealmDB
             var realm = await Database();
             try
             {
-                await realm.WriteAsync((r) => r.Add(data, false));
+                await realm.WriteAsync((r) => r.Add(data, true));
                 return true;
             }
             catch

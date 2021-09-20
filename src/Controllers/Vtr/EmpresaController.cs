@@ -26,45 +26,45 @@ namespace src.Controllers.Vtr
             _logger = logger;
         }
 
-        public override void OnActionExecuted(ActionExecutedContext context)
-        {
-            base.OnActionExecuted(context);
-        }
-
         // GET: api/<EmpresaController>
         [HttpGet]
-        public async Task<IEnumerable<Empresa>> Get()
+        public async Task<IActionResult> Get()
         {
-            return await _repo.GetAll();
+            var result = await _repo.GetAll();
+            return result.Any() ? Ok(result) : new EmptyResult();
         }
 
         // GET api/<EmpresaController>/5
         [HttpGet("{cnpj}")]
         public async Task<IActionResult> Get(string cnpj)
         {
-            var e = await _repo.GetById(cnpj);
-            return e != null ? Ok(e) : NotFound();
+            var t = await _repo.GetById(cnpj);
+            return t != null ? Ok(t) : NotFound();
         }
 
         // POST api/<EmpresaController>
         [HttpPost]
-        public async Task Post([FromBody] Empresa value)
+        public async Task<IActionResult> Post([FromBody] Empresa value)
         {
-            await _repo.Save(value);
+            bool result = (bool)await _repo.Save(value);
+            return result == true ? Accepted() : StatusCode(500);
         }
 
         // PUT api/<EmpresaController>
         [HttpPut]
-        public async Task Put([FromBody] Empresa value)
+        public async Task<IActionResult> Put([FromBody] Empresa value)
         {
-            await _repo.Update(value);
+            bool result = (bool)await _repo.Update(value);
+            return result == true ? Accepted() : StatusCode(500);
         }
 
         // DELETE api/<EmpresaController>/5
         [HttpDelete("{id}")]
-        public async Task Delete(object id)
+        public async Task<IActionResult> Delete(int id)
         {
-            await _repo.Delete(id);
+            bool result = (bool)await _repo.Delete(id);
+            return result == true ? Accepted() : StatusCode(500);
         }
+
     }
 }

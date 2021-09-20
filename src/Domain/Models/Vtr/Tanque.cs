@@ -28,6 +28,8 @@ namespace src.Domain.Models.Vtr
         [JsonProperty]
         public int Status { get; set; }
         [JsonProperty]
+        public double Custo { get; set; }
+        [JsonProperty]
         public IList<string> LinkDocs { get;}
     }
 
