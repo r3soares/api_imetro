@@ -26,6 +26,11 @@ namespace src.Controllers.Vtr
             _logger = logger;
         }
 
+        public override void OnActionExecuted(ActionExecutedContext context)
+        {
+            base.OnActionExecuted(context);
+        }
+
         // GET: api/<EmpresaController>
         [HttpGet]
         public async Task<IActionResult> Get()

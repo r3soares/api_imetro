@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using src.Domain.Models.Vtr;
 using src.Respositories;
@@ -14,7 +15,7 @@ namespace src.Controllers.Vtr
 {
     [Route("api/vtr/[controller]")]
     [ApiController]
-    public class TanqueController : ControllerBase
+    public class TanqueController : Controller
     {
         private readonly ILogger<TanqueController> _logger;
         private readonly IVtrRepository<Tanque> _repo;
@@ -23,6 +24,11 @@ namespace src.Controllers.Vtr
         {
             _repo = repo;
             _logger = logger;
+        }
+
+        public override void OnActionExecuted(ActionExecutedContext context)
+        {
+            base.OnActionExecuted(context);
         }
 
 
@@ -35,7 +41,7 @@ namespace src.Controllers.Vtr
         }
 
         // GET api/<TanqueController>/5
-        [HttpGet("{inmetro}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id)
         {
             var t = await _repo.GetById(id);
@@ -45,8 +51,24 @@ namespace src.Controllers.Vtr
         [HttpGet("placa/{placa}")]
         public async Task<IActionResult> GetByPlaca(string placa)
         {
-            var t = (await _repo.GetAll()).FirstOrDefault(tanque => tanque.Placa.Equals(placa));
-            return t != null ? Ok(t) : NotFound();
+            var t = (await _repo.GetAll());
+            if(t.Any())
+            {
+                var tanque = t.FirstOrDefault(tanque => tanque.Placa.Equals(placa));
+                return tanque != null ? Ok(tanque) : NotFound();
+            }
+            return t.Any() ? Ok(t) : NotFound();
+        }
+
+        [HttpGet("proprietario/{cnpj}")]
+        public async Task<IActionResult> GetByProprietario(string cnpj)
+        {
+            var t = await _repo.GetAll();
+            if(t.Any())
+            {
+                t = t.Where(tanque => tanque.Proprietario != null && tanque.Proprietario.Equals(cnpj));
+            }
+            return t.Any() ? Ok(t) : NotFound();
         }
 
         // POST api/<TanqueController>
