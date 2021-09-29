@@ -18,11 +18,11 @@ namespace src.Controllers.Vtr
     public class TanqueController : Controller
     {
         private readonly ILogger<TanqueController> _logger;
-        private readonly IVtrRepository<Tanque> _repo;
+        private readonly IVtrRepository<Tanque> _repoTanque;
 
         public TanqueController(IVtrRepository<Tanque> repo, ILogger<TanqueController> logger)
         {
-            _repo = repo;
+            _repoTanque = repo;
             _logger = logger;
         }
 
@@ -36,7 +36,7 @@ namespace src.Controllers.Vtr
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var result = await _repo.GetAll();
+            var result = await _repoTanque.GetAll();
             return result.Any() ? Ok(result) : new EmptyResult();
         }
 
@@ -44,14 +44,14 @@ namespace src.Controllers.Vtr
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id)
         {
-            var t = await _repo.GetById(id);
+            var t = await _repoTanque.GetById(id);
             return t != null ? Ok(t) : NotFound();
         }
 
         [HttpGet("placa/{placa}")]
         public async Task<IActionResult> GetByPlaca(string placa)
         {
-            var t = (await _repo.GetAll());
+            var t = (await _repoTanque.GetAll());
             if(t.Any())
             {
                 var tanque = t.FirstOrDefault(tanque => tanque.Placa.Equals(placa));
@@ -63,7 +63,7 @@ namespace src.Controllers.Vtr
         [HttpGet("proprietario/{cnpj}")]
         public async Task<IActionResult> GetByProprietario(string cnpj)
         {
-            var t = await _repo.GetAll();
+            var t = await _repoTanque.GetAll();
             if(t.Any())
             {
                 t = t.Where(tanque => tanque.Proprietario != null && tanque.Proprietario.Equals(cnpj));
@@ -75,7 +75,7 @@ namespace src.Controllers.Vtr
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Tanque value)
         {
-            bool result = (bool)await _repo.Save(value);
+            bool result = (bool)await _repoTanque.Save(value);
             return result == true ? Accepted() : StatusCode(500);
         }
 
@@ -83,7 +83,7 @@ namespace src.Controllers.Vtr
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] Tanque value)
         {
-            bool result = (bool)await _repo.Update(value);
+            bool result = (bool)await _repoTanque.Update(value);
             return result == true ? Accepted() : StatusCode(500);
         }
 
@@ -91,7 +91,7 @@ namespace src.Controllers.Vtr
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            bool result = (bool)await _repo.Delete(id);
+            bool result = (bool)await _repoTanque.Delete(id);
             return result == true ? Accepted() : StatusCode(500);
         }
     }

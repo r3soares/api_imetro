@@ -16,7 +16,7 @@ namespace src.Domain.Models.Vtr
         [Indexed]
         public string Placa { get; set; }
         [JsonProperty]
-        public IList<Compartimento> Compartimentos { get; }
+        public IList<Compartimento> Compartimentos { get; }        
         [JsonProperty]
         public string Proprietario { get; set; }
         [JsonProperty]
@@ -30,7 +30,7 @@ namespace src.Domain.Models.Vtr
         [JsonProperty]
         public double Custo { get; set; }
         [JsonProperty]
-        public IList<string> LinkDocs { get;}
+        public IList<string> LinkDocs { get; }
     }
 
 }
