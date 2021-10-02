@@ -15,7 +15,7 @@ namespace src.Domain.Models.Vtr
         /// Se houver bitrem, o mesmo será associado a agenda do outro veículo
         /// </summary>
         [JsonProperty]
-        public AgendaDoTanque BitremAgenda { get; set; }
+        public string BitremAgenda { get; set; }
 
         /// <summary>
         /// Agenda do dia
@@ -36,7 +36,7 @@ namespace src.Domain.Models.Vtr
         public int Status { get; set; }
 
         [JsonProperty]
-        public Empresa Responsavel { get; set; }
+        public string Responsavel { get; set; }
 
         [JsonProperty]
         public double CustoVerificacao { get; set; }
