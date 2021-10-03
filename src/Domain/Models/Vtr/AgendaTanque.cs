@@ -5,7 +5,7 @@ using System;
 namespace src.Domain.Models.Vtr
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class AgendaDoTanque : Realms.RealmObject
+    public class AgendaTanque : Realms.RealmObject
     {
         [JsonProperty]
         [PrimaryKey]
@@ -21,10 +21,10 @@ namespace src.Domain.Models.Vtr
         /// Agenda do dia
         /// </summary>
         [JsonProperty]
-        public long TanqueAgendado { get; set; }
+        public string Agenda { get; set; }
 
         [JsonProperty]
-        public int Tanque { get; set; }
+        public string Tanque { get; set; }
 
         [JsonProperty]
         public int StatusConfirmacao { get; set; }
@@ -33,7 +33,7 @@ namespace src.Domain.Models.Vtr
         public int StatusPagamento { get; set; }
 
         [JsonProperty]
-        public int Status { get; set; }
+        public string AgendaAnterior { get; set; }
 
         [JsonProperty]
         public string Responsavel { get; set; }
@@ -43,6 +43,9 @@ namespace src.Domain.Models.Vtr
 
         [JsonProperty]
         public int TempoVerificacao { get; set; } //Em minutos
+
+        [JsonProperty]
+        public string Obs { get; set; }
     }
 
 }

@@ -24,7 +24,7 @@ namespace src.Domain.Models.Vtr
         [JsonProperty]
         public DateTimeOffset DataUltimaAlteracao { get; set; }
         [JsonProperty]
-        public AgendaDoTanque TanqueAgendado { get; set; }
+        public string TanqueAgendado { get; set; }
         [JsonProperty]
         public int Status { get; set; }
         [JsonProperty]

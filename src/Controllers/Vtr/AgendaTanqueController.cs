@@ -13,46 +13,46 @@ namespace src.Controllers.Vtr
 {
     [Route("api/vtr/[controller]")]
     [ApiController]
-    public class TanqueAgendaController : ControllerBase
+    public class AgendaTanqueController : ControllerBase
     {
-        private readonly IVtrRepository<AgendaDoTanque> _repo;
-        private readonly ILogger<TanqueAgendaController> _logger;
+        private readonly IVtrRepository<AgendaTanque> _repo;
+        private readonly ILogger<AgendaTanqueController> _logger;
 
-        public TanqueAgendaController(IVtrRepository<AgendaDoTanque> repo, ILogger<TanqueAgendaController> logger)
+        public AgendaTanqueController(IVtrRepository<AgendaTanque> repo, ILogger<AgendaTanqueController> logger)
         {
             _repo = repo;
             _logger = logger;
         }
 
-        // GET: api/<TanqueAgendadoController>
+        // GET: api/<AgendaController>
         [HttpGet]
-        public async Task<IEnumerable<AgendaDoTanque>> Get()
+        public async Task<IEnumerable<AgendaTanque>> Get()
         {
             return await _repo.GetAll();
         }
 
-        // GET api/<TanqueAgendadoController>/5
+        // GET api/<AgendaController>/5
         [HttpGet("{id}")]
-        public async Task<AgendaDoTanque> Get(object id)
+        public async Task<AgendaTanque> Get(object id)
         {
             return await _repo.GetById(id);
         }
 
-        // POST api/<TanqueAgendadoController>
+        // POST api/<AgendaController>
         [HttpPost]
-        public async Task Post([FromBody] AgendaDoTanque value)
+        public async Task Post([FromBody] AgendaTanque value)
         {
             await _repo.Save(value);
         }
 
-        // PUT api/<TanqueAgendadoController>
+        // PUT api/<AgendaController>
         [HttpPut]
-        public async Task Put([FromBody] AgendaDoTanque value)
+        public async Task Put([FromBody] AgendaTanque value)
         {
             await _repo.Update(value);
         }
 
-        // DELETE api/<TanqueAgendadoController>/5
+        // DELETE api/<AgendaController>/5
         [HttpDelete("{id}")]
         public async Task Delete(object id)
         {
