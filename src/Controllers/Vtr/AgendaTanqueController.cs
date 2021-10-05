@@ -40,6 +40,20 @@ namespace src.Controllers.Vtr
             return t != null ? Ok(t) : NotFound();
         }
 
+        [HttpGet("agendas/{agendas}")]
+        public async Task<IActionResult> GetByAgendas(string agendas)
+        {
+            string[] lista = agendas.Split("|");
+            if (!lista.Any()) return BadRequest(agendas);
+            var at = (await _repo.GetAll());
+            if (at.Any())
+            {                
+                var agendasTanque = at.Where(agenda => lista.Contains(agenda.Agenda));
+                return agendas != null ? Ok(agendas) : NotFound();
+            }
+            return at.Any() ? Ok(agendas) : NotFound();
+        }
+
         // POST api/<AgendaController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AgendaTanque value)

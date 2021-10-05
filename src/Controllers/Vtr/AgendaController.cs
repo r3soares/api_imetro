@@ -41,6 +41,35 @@ namespace src.Controllers.Vtr
             return t != null ? Ok(t) : NotFound();
         }
 
+        [HttpGet("data/{data}")]
+        public async Task<IActionResult> GetByData(string data)
+        {
+            if(!DateTimeOffset.TryParse(data, out var d)) return BadRequest(data);
+            var t = (await _repo.GetAll());
+            if (t.Any())
+            {
+                var agenda = t.FirstOrDefault(agenda => agenda.Data == d);
+                return agenda != null ? Ok(agenda) : NotFound();
+            }
+            return t.Any() ? Ok(t) : NotFound();
+        }
+
+        [HttpGet("periodo/{periodo}")]
+        public async Task<IActionResult> GetByPeriodo(string periodo)
+        {
+            var t = (await _repo.GetAll());
+            if (t.Any())
+            {
+                var inicioFim = periodo.Split("|");
+                bool valido = DateTimeOffset.TryParse(inicioFim[0], out var inicio) &
+                DateTimeOffset.TryParse(inicioFim[1], out var fim);
+                if (!valido) return BadRequest(periodo);
+                var agendas = t.Where(agenda => agenda.Data >= inicio && agenda.Data <= fim);
+                return agendas != null ? Ok(agendas) : NotFound();
+            }
+            return t.Any() ? Ok(t) : NotFound();
+        }
+
         // POST api/<AgendaController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Agenda value)
