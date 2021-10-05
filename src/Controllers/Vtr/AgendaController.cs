@@ -25,38 +25,44 @@ namespace src.Controllers.Vtr
         }
 
         // GET: api/<AgendaController>
+        // GET: api/<AgendaController>
         [HttpGet]
-        public async Task<IEnumerable<Agenda>> Get()
+        public async Task<IActionResult> Get()
         {
-            return await _repo.GetAll();
+            var result = await _repo.GetAll();
+            return result.Any() ? Ok(result) : new EmptyResult();
         }
 
         // GET api/<AgendaController>/5
         [HttpGet("{id}")]
-        public async Task<Agenda> Get(object id)
+        public async Task<IActionResult> Get(string id)
         {
-            return await _repo.GetById(id);
+            var t = await _repo.GetById(id);
+            return t != null ? Ok(t) : NotFound();
         }
 
         // POST api/<AgendaController>
         [HttpPost]
-        public async Task Post([FromBody] Agenda value)
+        public async Task<IActionResult> Post([FromBody] Agenda value)
         {
-            await _repo.Save(value);
+            bool result = (bool)await _repo.Save(value);
+            return result == true ? Accepted() : StatusCode(500);
         }
 
         // PUT api/<AgendaController>
         [HttpPut]
-        public async Task Put([FromBody] Agenda value)
+        public async Task<IActionResult> Put([FromBody] Agenda value)
         {
-            await _repo.Update(value);
+            bool result = (bool)await _repo.Update(value);
+            return result == true ? Accepted() : StatusCode(500);
         }
 
         // DELETE api/<AgendaController>/5
         [HttpDelete("{id}")]
-        public async Task Delete(object id)
+        public async Task<IActionResult> Delete(string id)
         {
-            await _repo.Delete(id);
+            bool result = (bool)await _repo.Delete(id);
+            return result == true ? Accepted() : StatusCode(500);
         }
     }
 }
