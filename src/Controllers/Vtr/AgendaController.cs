@@ -43,12 +43,12 @@ namespace src.Controllers.Vtr
 
         [HttpGet("data/{data}")]
         public async Task<IActionResult> GetByData(string data)
-        {
-            if(!DateTimeOffset.TryParse(data, out var d)) return BadRequest(data);
+        {            
             var t = (await _repo.GetAll());
             if (t.Any())
             {
-                var agenda = t.FirstOrDefault(agenda => agenda.Data == d);
+                if (!DateTimeOffset.TryParse(data, out var d)) return BadRequest(data);
+                var agenda = t.FirstOrDefault(a => a.Data == d);
                 return agenda != null ? Ok(agenda) : NotFound();
             }
             return t.Any() ? Ok(t) : NotFound();

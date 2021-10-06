@@ -40,18 +40,17 @@ namespace src.Controllers.Vtr
             return t != null ? Ok(t) : NotFound();
         }
 
-        [HttpGet("agendas/{agendas}")]
-        public async Task<IActionResult> GetByAgendas(string agendas)
+        [HttpGet("agendas")]
+        public async Task<IActionResult> GetByAgendas([FromBody]List<string> agendas)
         {
-            string[] lista = agendas.Split("|");
-            if (!lista.Any()) return BadRequest(agendas);
+            if (!agendas.Any()) return BadRequest(agendas);
             var at = (await _repo.GetAll());
             if (at.Any())
             {                
-                var agendasTanque = at.Where(agenda => lista.Contains(agenda.Agenda));
-                return agendas != null ? Ok(agendas) : NotFound();
+                var atFiltrado = at.Where(agenda => agendas.Contains(agenda.Agenda));
+                return atFiltrado != null ? Ok(agendas) : NotFound();
             }
-            return at.Any() ? Ok(agendas) : NotFound();
+            return NotFound();
         }
 
         // POST api/<AgendaController>
