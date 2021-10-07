@@ -39,6 +39,31 @@ namespace src.Controllers.Vtr
             return t != null ? Ok(t) : NotFound();
         }
 
+        [HttpGet("lista")]
+        public async Task<IActionResult> GetFromList([FromBody] List<string> ids)
+        {
+            if (!ids.Any()) return BadRequest(ids);
+            var at = (await _repo.GetAll());
+            if (at.Any())
+            {
+                List<TanqueAgendado> lista = new(ids.Count);
+                foreach(var id in ids)
+                {
+                    TanqueAgendado ta = await _repo.GetById(id);
+                    if(ta != null)
+                    {
+                        lista.Add(ta);
+                        continue;
+                    }
+                    return BadRequest(ids);
+                }
+                //var atFiltrado = at.Where(agendado => ids.Contains(agendado.Id));
+                return Ok(lista);
+            }
+            return NotFound();
+        }
+
+
         [HttpGet("agendas")]
         public async Task<IActionResult> GetByAgendas([FromBody] List<string> agendas)
         {
@@ -47,7 +72,7 @@ namespace src.Controllers.Vtr
             if (at.Any())
             {
                 var atFiltrado = at.Where(agenda => agendas.Contains(agenda.Agenda));
-                return atFiltrado != null ? Ok(agendas) : NotFound();
+                return atFiltrado != null ? Ok(atFiltrado) : NotFound();
             }
             return NotFound();
         }
