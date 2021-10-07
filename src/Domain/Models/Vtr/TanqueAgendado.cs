@@ -5,7 +5,7 @@ using System;
 namespace src.Domain.Models.Vtr
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class AgendaTanque : Realms.RealmObject
+    public class TanqueAgendado : Realms.RealmObject
     {
         [JsonProperty]
         [PrimaryKey]
