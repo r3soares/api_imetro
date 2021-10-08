@@ -3,19 +3,20 @@ using Realms;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace src.Domain.Models.Vtr
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class Agenda : RealmObject
-    {
+    { 
         [PrimaryKey]
         [JsonProperty]
-        public string Id { get; set; }
-        [JsonProperty]
+        public string Data { get; set; }        
         [Indexed]
-        public DateTimeOffset Data { get; set; } //DD/MM/YYYY
+        public DateTimeOffset D { get; set; }
+
         [JsonProperty]
         public IList<string> TanquesAgendados { get;}
         [JsonProperty]

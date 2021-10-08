@@ -4,6 +4,7 @@ using src.Domain.Models.Vtr;
 using src.Respositories;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,6 +18,7 @@ namespace src.Controllers.Vtr
     {
         private readonly IVtrRepository<Agenda> _repo;
         private readonly ILogger<AgendaController> _logger;
+        private readonly CultureInfo dataFormato = CultureInfo.GetCultureInfo("pt-BR");
 
         public AgendaController(IVtrRepository<Agenda> repo, ILogger<AgendaController> logger)
         {
@@ -41,19 +43,6 @@ namespace src.Controllers.Vtr
             return t != null ? Ok(t) : NotFound();
         }
 
-        [HttpGet("data/{data}")]
-        public async Task<IActionResult> GetByData(string data)
-        {            
-            var t = (await _repo.GetAll());
-            if (t.Any())
-            {
-                if (!DateTimeOffset.TryParse(data, out var d)) return BadRequest(data);
-                var agenda = t.FirstOrDefault(a => a.Data == d);
-                return agenda != null ? Ok(agenda) : NotFound();
-            }
-            return t.Any() ? Ok(t) : NotFound();
-        }
-
         [HttpGet("periodo/{periodo}")]
         public async Task<IActionResult> GetByPeriodo(string periodo)
         {
@@ -64,7 +53,7 @@ namespace src.Controllers.Vtr
                 bool valido = DateTimeOffset.TryParse(inicioFim[0], out var inicio) &
                 DateTimeOffset.TryParse(inicioFim[1], out var fim);
                 if (!valido) return BadRequest(periodo);
-                var agendas = t.Where(agenda => agenda.Data >= inicio && agenda.Data <= fim);
+                var agendas = t.Where(agenda => agenda.D >= inicio.Date && agenda.D <= fim.Date);
                 return agendas != null ? Ok(agendas) : NotFound();
             }
             return t.Any() ? Ok(t) : NotFound();
@@ -74,6 +63,7 @@ namespace src.Controllers.Vtr
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Agenda value)
         {
+            value.D = DateTimeOffset.Parse(value.Data, dataFormato);
             bool result = (bool)await _repo.Save(value);
             return result == true ? Accepted() : StatusCode(500);
         }
@@ -82,6 +72,7 @@ namespace src.Controllers.Vtr
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] Agenda value)
         {
+            value.D = DateTimeOffset.Parse(value.Data, dataFormato);
             bool result = (bool)await _repo.Update(value);
             return result == true ? Accepted() : StatusCode(500);
         }
