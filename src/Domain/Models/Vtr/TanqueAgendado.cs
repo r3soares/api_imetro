@@ -24,7 +24,7 @@ namespace src.Domain.Models.Vtr
         public string Agenda { get; set; }
 
         [JsonProperty]
-        public string Tanque { get; set; }
+        public Tanque Tanque { get; set; }
 
         [JsonProperty]
         public int StatusConfirmacao { get; set; }
