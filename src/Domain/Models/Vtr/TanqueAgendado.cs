@@ -36,7 +36,7 @@ namespace src.Domain.Models.Vtr
         public string AgendaAnterior { get; set; }
 
         [JsonProperty]
-        public string Responsavel { get; set; }
+        public Empresa Responsavel { get; set; }
 
         [JsonProperty]
         public double CustoVerificacao { get; set; }
