@@ -18,6 +18,12 @@ namespace src.Domain.Models.Vtr
         public string BitremAgenda { get; set; }
 
         /// <summary>
+        /// Tanque Zero
+        /// </summary>
+        [JsonProperty]
+        public bool IsNovo { get; set; }
+
+        /// <summary>
         /// Agenda do dia
         /// </summary>
         [JsonProperty]
