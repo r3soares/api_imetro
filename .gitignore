@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 *.realm
 *.lock
+*.tmp_compaction_space

@@ -11,6 +11,7 @@ namespace src.Respositories.Infra.Databases.RealmDB
         where T : RealmObject
         
     {
+        static bool isCompactado = false;
         private RealmConfigurationBase _configuration;
         private async Task<Realm> Database() { return await Realm.GetInstanceAsync(_configuration); }
         public RealmDatabase(string databaseName, bool persist = true)
@@ -19,6 +20,10 @@ namespace src.Respositories.Infra.Databases.RealmDB
             string path = Path.Combine(folder, databaseName);
             Directory.CreateDirectory(folder);
             _configuration = persist ? new RealmConfiguration(path) : new InMemoryConfiguration(databaseName);
+            if(!isCompactado && persist)
+            {                
+                isCompactado = Realm.Compact(_configuration);
+            }
         }
 
         public async Task<object> Delete(object id)
