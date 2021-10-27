@@ -11,6 +11,9 @@ namespace src.Domain.Models.Vtr
         [PrimaryKey]
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
+        [JsonProperty]
+        public DateTimeOffset DataRegistro { get; set; }
+
         /// <summary>
         /// Se houver bitrem, o mesmo será associado a agenda do outro veículo
         /// </summary>

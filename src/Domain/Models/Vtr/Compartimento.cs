@@ -13,6 +13,9 @@ namespace src.Domain.Models.Vtr
 
         [JsonProperty]
         public int Setas { get; set; }
+
+        [JsonProperty]
+        public string Obs { get; set; }
     }
 
 }

@@ -14,8 +14,6 @@ namespace src.Domain.Models.Vtr
 
         [JsonProperty]
         public int CodMun { get; set; }
-        //[JsonProperty]
-        //public IList<string> Tanques { get; }
 
     }
 

@@ -22,6 +22,8 @@ namespace src.Domain.Models.Vtr
         public string Email { get; set; }
         [JsonProperty]
         public int Status { get; set; }
+        [JsonProperty]
+        public string Obs { get; set; }
     }
 
 }

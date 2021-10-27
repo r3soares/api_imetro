@@ -29,6 +29,8 @@ namespace src.Domain.Models.Vtr
         public double Custo { get; set; }
         [JsonProperty]
         public IList<string> LinkDocs { get; }
+        [JsonProperty]
+        public string Obs { get; }
     }
 
 }
