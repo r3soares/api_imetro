@@ -18,7 +18,7 @@ namespace src.Domain.Models.Vtr
         [JsonProperty]
         public IList<Compartimento> Compartimentos { get; }        
         [JsonProperty]
-        public string Proprietario { get; set; }
+        public Empresa Proprietario { get; set; }
         [JsonProperty]
         public DateTimeOffset DataRegistro { get; set; }
         [JsonProperty]
