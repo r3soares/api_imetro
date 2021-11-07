@@ -58,6 +58,7 @@ namespace src
             //    services.Add(new ServiceDescriptor(typeof(IObjectModelValidator), _ => new NonValidatingValidator(), ServiceLifetime.Singleton));
             //}
             services.AddSingleton(typeof(IVtrRepository<>),typeof(VtrRepository<>));
+            services.AddSingleton(typeof(IMunicipiosRepository), typeof(MunicipiosRepository));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
