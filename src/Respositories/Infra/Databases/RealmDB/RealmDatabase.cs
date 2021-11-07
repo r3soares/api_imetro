@@ -12,7 +12,7 @@ namespace src.Respositories.Infra.Databases.RealmDB
         
     {
         static bool isCompactado = false;
-        private RealmConfigurationBase _configuration;
+        private readonly RealmConfigurationBase _configuration;
         private async Task<Realm> Database() { return await Realm.GetInstanceAsync(_configuration); }
         public RealmDatabase(string databaseName, bool persist = true)
         {

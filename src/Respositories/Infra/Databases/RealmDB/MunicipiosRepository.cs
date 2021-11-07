@@ -9,7 +9,7 @@ namespace src.Respositories.Infra.Databases.RealmDB
 {
     public class MunicipiosRepository : IMunicipiosRepository
     {
-        private IRepository<Municipio> _repository;
+        private readonly IRepository<Municipio> _repository;
         public MunicipiosRepository()
         {
             _repository = new RealmDatabase<Municipio>("municipios.realm");

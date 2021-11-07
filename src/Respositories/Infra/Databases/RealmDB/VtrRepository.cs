@@ -10,7 +10,7 @@ namespace src.Respositories.Infra.Databases.RealmDB
         where T : RealmObject 
     {
         static readonly bool PERSISTENCIA_BANCO = true;
-        private IRepository<T> _repository;
+        private readonly IRepository<T> _repository;
         public VtrRepository()
         {
             _repository = new RealmDatabase<T>("vtr.realm", PERSISTENCIA_BANCO);
