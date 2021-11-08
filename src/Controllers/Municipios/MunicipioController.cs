@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using src.Domain.Models.Municipios;
 using src.Respositories;
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,6 +17,7 @@ namespace src.Controllers.Vtr
     {
         private readonly IMunicipiosRepository _repo;
         private readonly ILogger<MunicipioController> _logger;
+        private readonly CultureInfo cultura = CultureInfo.InvariantCulture;
 
         public MunicipioController(IMunicipiosRepository repo, ILogger<MunicipioController> logger)
         {
@@ -34,7 +36,7 @@ namespace src.Controllers.Vtr
 
         // GET api/<AgendaController>/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id)
+        public async Task<IActionResult> Get(int id)
         {
             var t = await _repo.GetById(id);
             return t != null ? Ok(t) : NotFound();
@@ -43,10 +45,12 @@ namespace src.Controllers.Vtr
         [HttpGet("nome/{nome}")]
         public async Task<IActionResult> GetByNome(string nome)
         {
-            var t = (await _repo.GetAll());
+            nome = nome.Replace("|","");
+            var termos = nome.Split(" ");
+            var t = await _repo.GetAll();
             if (t.Any())
             {
-                var cidades = t.Where(m => m.NoMunicipio.StartsWith(nome,StringComparison.OrdinalIgnoreCase));
+                var cidades = t.Where(m => m.NoMunicipio.StartsWith(nome, StringComparison.OrdinalIgnoreCase));
                 return cidades != null ? Ok(cidades) : NotFound();
             }
             return t.Any() ? Ok(t) : NotFound();
