@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace src.Controllers.Vtr
 {
-    [Route("api/[controller]")]
+    [Route("api/sgi/[controller]")]
     [ApiController]
     public class MunicipioController : ControllerBase
     {
