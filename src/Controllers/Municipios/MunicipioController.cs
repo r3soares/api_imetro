@@ -46,7 +46,6 @@ namespace src.Controllers.Vtr
         public async Task<IActionResult> GetByNome(string nome)
         {
             nome = nome.Replace("|","");
-            var termos = nome.Split(" ");
             var t = await _repo.GetAll();
             if (t.Any())
             {
