@@ -47,6 +47,31 @@ namespace src.Controllers.Vtr
             return t != null ? Ok(t) : NotFound();
         }
 
+        [HttpGet("nome/{nome}")]
+        public async Task<IActionResult> GetByNome(string nome)
+        {
+            nome = nome.Replace("|", "");
+            var t = await _repo.GetAll();
+            if (t.Any())
+            {
+                var empresas = t.Where(e => e.Nome.StartsWith(nome, StringComparison.OrdinalIgnoreCase));
+                return empresas != null ? Ok(empresas) : NotFound();
+            }
+            return t.Any() ? Ok(t) : NotFound();
+        }
+
+        [HttpGet("cnpjParcial/{cnpj}")]
+        public async Task<IActionResult> GetByCnpjParcial(string cnpj)
+        {
+            var t = await _repo.GetAll();
+            if (t.Any())
+            {
+                var empresas = t.Where(e => e.Cnpj.StartsWith(cnpj, StringComparison.OrdinalIgnoreCase));
+                return empresas != null ? Ok(empresas) : NotFound();
+            }
+            return t.Any() ? Ok(t) : NotFound();
+        }
+
         // POST api/<EmpresaController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Empresa value)
