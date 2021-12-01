@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using Realms;
 
@@ -31,6 +32,9 @@ namespace src.Domain.Models.Vtr
         public IList<string> LinkDocs { get; }
         [JsonProperty]
         public string Obs { get; }
+
+        [Backlink(nameof(TanqueAgendado.Tanque))]
+        public IQueryable<TanqueAgendado> Historico { get;}
     }
 
 }

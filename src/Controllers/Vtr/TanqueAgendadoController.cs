@@ -42,7 +42,7 @@ namespace src.Controllers.Vtr
         [HttpGet("pendentes")]
         public async Task<IActionResult> GetPendentes()
         {
-            var t = (await _repo.GetAll());
+            var t = await _repo.GetAll();
             if (t.Any())
             {
                 var pendentes = t.Where(tAgendado => tAgendado.StatusConfirmacao == 0);

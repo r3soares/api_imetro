@@ -71,6 +71,13 @@ namespace src.Controllers.Vtr
             return t.Any() ? Ok(t) : NotFound();
         }
 
+        [HttpGet("historico/{inmetro}")]
+        public async Task<IActionResult> GetHistorico(string inmetro)
+        {
+            var t = await _repo.GetById(inmetro);
+            return t != null ? Ok(t.Historico) : NotFound();
+        }
+
         // POST api/<TanqueController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Tanque value)
