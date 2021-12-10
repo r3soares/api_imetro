@@ -29,13 +29,15 @@ namespace src.Respositories.Infra.Databases.RealmDB
         public async Task<object> Delete(object id)
         {
             var data = await GetById(id);
+            var realm = await Database();
             try
             {
-                (await Database()).Remove(data);
+                await realm.WriteAsync((r) => r.Remove(data));
                 return true;
             }
             catch
             {
+
                 return false;
             }
             
