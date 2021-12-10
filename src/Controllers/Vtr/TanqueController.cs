@@ -60,6 +60,30 @@ namespace src.Controllers.Vtr
             return t.Any() ? Ok(t) : NotFound();
         }
 
+        [HttpGet("placaParcial/{placa}")]
+        public async Task<IActionResult> GetByPlacaParcial(string placa)
+        {
+            var t = await _repo.GetAll();
+            if (t.Any())
+            {
+                var tanques = t.Where(t => t.Placa.StartsWith(placa, StringComparison.OrdinalIgnoreCase));
+                return tanques != null ? Ok(tanques) : NotFound();
+            }
+            return t.Any() ? Ok(t) : NotFound();
+        }
+
+        [HttpGet("inmetroParcial/{inmetro}")]
+        public async Task<IActionResult> GetByInmetroParcial(string inmetro)
+        {
+            var t = await _repo.GetAll();
+            if (t.Any())
+            {
+                var tanques = t.Where(t => t.CodInmetro.StartsWith(inmetro, StringComparison.OrdinalIgnoreCase));
+                return tanques != null ? Ok(tanques) : NotFound();
+            }
+            return t.Any() ? Ok(t) : NotFound();
+        }
+
         [HttpGet("proprietario/{cnpj}")]
         public async Task<IActionResult> GetByProprietario(string cnpj)
         {
