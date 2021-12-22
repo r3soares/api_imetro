@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -36,12 +37,17 @@ namespace src
         {
             services.AddCors(options =>
             {
-                options.AddDefaultPolicy(
+                services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme)
+                    .AddCertificate()
+                    .AddCertificateCache();
+                options.AddPolicy(name:"CorsPolicy",
                     builder =>
                     {
-                        builder.AllowAnyOrigin()
+                        builder
+                        .AllowAnyOrigin()
                         .AllowAnyHeader()
                         .AllowAnyMethod();
+                        //.AllowCredentials();
                     });
             });
             services.AddControllers()
@@ -72,7 +78,8 @@ namespace src
             //app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors();
+            app.UseCors("CorsPolicy");
+            app.UseAuthentication();
 
             //app.UseAuthorization();
 
