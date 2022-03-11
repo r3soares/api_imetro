@@ -74,13 +74,17 @@ namespace src
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            //app.Use((context, next) => {
+            //    context.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+            //    context.Response.Headers.Add("Access-Control-Allow-Headers", new[] { "Origin", "Accept", "Content-Type" });
+            //    return next.Invoke();
+            //});
             //app.UseHttpsRedirection();
 
             app.UseRouting();
             app.UseCors("CorsPolicy");
-            app.UseAuthentication();
-
+            //app.UseAuthentication();
+            //app.UseMvc();
             //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
