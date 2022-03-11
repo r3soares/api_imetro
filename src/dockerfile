@@ -1,0 +1,30 @@
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /source
+
+# copy csproj and restore as distinct layers
+COPY src.csproj .
+RUN dotnet restore
+
+# copy and publish app and libraries
+COPY . .
+RUN dotnet publish src.sln -c release -o /app --no-cache /restore
+
+# final stage/image
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR /app
+COPY --from=build /app .
+ENTRYPOINT ["dotnet", "src.dll"]
+
+#Comando utilizado para criar docker acima
+#docker build -t r3soares/api-imetro:alpha1 -f dockerfile .
+#Comando para enviar o docker para o repositório
+#docker push r3soares/api-imetro:alpha1
+#Comando para pegar o docker do repositorio
+#docker pull r3soares/api-imetro:alpha1
+#Comando para rodar o dock
+#docker run -d -p 2908:8080 r3soares/api-imetro:alpha1
+
+#FROM mcr.microsoft.com/dotnet/aspnet:6.0
+#COPY bin/Release/net6.0/publish/ App/
+#WORKDIR /App
+#ENTRYPOINT ["dotnet", "src.dll"]
