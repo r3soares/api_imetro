@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using src.Domain.Models.Municipios;
 using src.Respositories;
 using System;
 using System.Globalization;
@@ -45,7 +44,7 @@ namespace src.Controllers.Vtr
         [HttpGet("nome/{nome}")]
         public async Task<IActionResult> GetByNome(string nome)
         {
-            nome = nome.Replace("|","");
+            nome = nome.Replace("|", "");
             var t = await _repo.GetAll();
             if (t.Any())
             {

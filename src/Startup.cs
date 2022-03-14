@@ -1,25 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using src.Domain.Models.Vtr;
 using src.Respositories;
 using src.Respositories.Infra.Databases.RealmDB;
-using src.Validators;
+using System.Globalization;
 
 namespace src
 {
@@ -40,7 +29,7 @@ namespace src
                 services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme)
                     .AddCertificate()
                     .AddCertificateCache();
-                options.AddPolicy(name:"CorsPolicy",
+                options.AddPolicy(name: "CorsPolicy",
                     builder =>
                     {
                         builder
@@ -55,7 +44,7 @@ namespace src
                 {
                     options.SerializerSettings.MetadataPropertyHandling = MetadataPropertyHandling.Ignore;
                     options.SerializerSettings.DateParseHandling = DateParseHandling.None;
-                    options.SerializerSettings.Converters.Add(new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal});
+                    options.SerializerSettings.Converters.Add(new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal });
                 });
             //var validator = services.FirstOrDefault(s => s.ServiceType == typeof(IObjectModelValidator));
             //if (validator != null)
@@ -63,7 +52,7 @@ namespace src
             //    services.Remove(validator);
             //    services.Add(new ServiceDescriptor(typeof(IObjectModelValidator), _ => new NonValidatingValidator(), ServiceLifetime.Singleton));
             //}
-            services.AddSingleton(typeof(IVtrRepository<>),typeof(VtrRepository<>));
+            services.AddSingleton(typeof(IVtrRepository<>), typeof(VtrRepository<>));
             services.AddSingleton(typeof(IMunicipiosRepository), typeof(MunicipiosRepository));
         }
 

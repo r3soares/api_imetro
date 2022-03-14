@@ -1,7 +1,6 @@
 using Newtonsoft.Json;
 using Realms;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace src.Domain.Models.Vtr
 {
@@ -17,7 +16,7 @@ namespace src.Domain.Models.Vtr
         [JsonProperty]
         public string Nome { get; set; }
         [JsonProperty]
-        public IList<string> Telefones { get;}
+        public IList<string> Telefones { get; }
         [JsonProperty]
         public string Email { get; set; }
         [JsonProperty]

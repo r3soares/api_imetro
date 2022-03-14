@@ -1,6 +1,5 @@
 ﻿using Realms;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +8,7 @@ namespace src.Respositories.Infra.Databases.RealmDB
 {
     class RealmDatabase<T> : IRepository<T>
         where T : RealmObject
-        
+
     {
         static bool isCompactado = false;
         private readonly RealmConfigurationBase _configuration;
@@ -20,8 +19,8 @@ namespace src.Respositories.Infra.Databases.RealmDB
             string path = Path.Combine(folder, databaseName);
             Directory.CreateDirectory(folder);
             _configuration = persist ? new RealmConfiguration(path) : new InMemoryConfiguration(databaseName);
-            if(!isCompactado && persist)
-            {                
+            if (!isCompactado && persist)
+            {
                 isCompactado = Realm.Compact(_configuration);
             }
         }
@@ -40,7 +39,7 @@ namespace src.Respositories.Infra.Databases.RealmDB
 
                 return false;
             }
-            
+
         }
 
         public async Task<IQueryable<T>> GetAll()
@@ -50,10 +49,10 @@ namespace src.Respositories.Infra.Databases.RealmDB
 
         public async Task<T> GetById(object id) => id switch
         {
-            long d      => (await Database()).Find<T>(d),
-            int d       => (await Database()).Find<T>(d),
-            string d    => (await Database()).Find<T>(d),
-            Guid d      => (await Database()).Find<T>(d),
+            long d => (await Database()).Find<T>(d),
+            int d => (await Database()).Find<T>(d),
+            string d => (await Database()).Find<T>(d),
+            Guid d => (await Database()).Find<T>(d),
             _ => null
         };
 
@@ -70,7 +69,7 @@ namespace src.Respositories.Infra.Databases.RealmDB
 
                 return false;
             }
-            
+
         }
 
         public async Task<object> Update(T data)

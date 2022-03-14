@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using src.Domain.Models.Vtr;
 using src.Respositories;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;

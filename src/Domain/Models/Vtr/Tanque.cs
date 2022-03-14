@@ -1,8 +1,8 @@
+using Newtonsoft.Json;
+using Realms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
-using Realms;
 
 namespace src.Domain.Models.Vtr
 {
@@ -10,14 +10,14 @@ namespace src.Domain.Models.Vtr
     public class Tanque : RealmObject
     {
         [JsonProperty]
-        [PrimaryKey] 
+        [PrimaryKey]
         [Required]
         public string CodInmetro { get; set; }
         [JsonProperty]
         [Indexed]
         public string Placa { get; set; }
         [JsonProperty]
-        public IList<Compartimento> Compartimentos { get; }        
+        public IList<Compartimento> Compartimentos { get; }
         [JsonProperty]
         public Empresa Proprietario { get; set; }
         [JsonProperty]
@@ -32,7 +32,7 @@ namespace src.Domain.Models.Vtr
         public string Obs { get; }
 
         [Backlink(nameof(TanqueAgendado.Tanque))]
-        public IQueryable<TanqueAgendado> Historico { get;}
+        public IQueryable<TanqueAgendado> Historico { get; }
     }
 
 }

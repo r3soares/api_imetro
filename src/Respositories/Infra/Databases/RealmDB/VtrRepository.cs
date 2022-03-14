@@ -1,13 +1,11 @@
 ﻿using Realms;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace src.Respositories.Infra.Databases.RealmDB
 {
     public class VtrRepository<T> : IVtrRepository<T>
-        where T : RealmObject 
+        where T : RealmObject
     {
         static readonly bool PERSISTENCIA_BANCO = true;
         private readonly IRepository<T> _repository;

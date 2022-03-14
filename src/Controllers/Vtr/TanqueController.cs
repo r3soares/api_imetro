@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using src.Domain.Models.Vtr;
 using src.Respositories;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -52,7 +50,7 @@ namespace src.Controllers.Vtr
         public async Task<IActionResult> GetByPlaca(string placa)
         {
             var t = (await _repo.GetAll());
-            if(t.Any())
+            if (t.Any())
             {
                 var tanque = t.FirstOrDefault(tanque => tanque.Placa.Equals(placa));
                 return tanque != null ? Ok(tanque) : NotFound();
@@ -88,7 +86,7 @@ namespace src.Controllers.Vtr
         public async Task<IActionResult> GetByProprietario(string cnpj)
         {
             var t = await _repo.GetAll();
-            if(t.Any())
+            if (t.Any())
             {
                 t = t.Where(tanque => tanque.Proprietario != null && tanque.Proprietario.Equals(cnpj));
             }
