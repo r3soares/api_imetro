@@ -5,7 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Databases\municipios.realm" />
+    <Compile Remove="Databases\municipios.realm.management\**" />
+    <Compile Remove="Databases\vtr.realm.management\**" />
+    <Content Remove="Databases\municipios.realm.management\**" />
+    <Content Remove="Databases\vtr.realm.management\**" />
+    <EmbeddedResource Remove="Databases\municipios.realm.management\**" />
+    <EmbeddedResource Remove="Databases\vtr.realm.management\**" />
+    <None Remove="Databases\municipios.realm.management\**" />
+    <None Remove="Databases\vtr.realm.management\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Databases\municipios.realm.lock" />
+    <None Remove="Databases\vtr.realm" />
+    <None Remove="Databases\vtr.realm.lock" />
+    <None Remove="Databases\vtr.realm.tmp_compaction_space" />
   </ItemGroup>
 
   <ItemGroup>
