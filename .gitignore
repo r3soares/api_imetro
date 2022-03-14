@@ -351,3 +351,4 @@ MigrationBackup/
 *.realm.*
 vtr.realm
 *.tmp_compaction_space
+/src/src - Backup.csproj
