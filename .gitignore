@@ -348,6 +348,6 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-*.realm
-*.lock
+*.realm.*
+vtr.realm
 *.tmp_compaction_space
