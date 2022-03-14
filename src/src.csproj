@@ -36,4 +36,10 @@
     </Resource>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Databases\municipios.realm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
