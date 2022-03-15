@@ -72,8 +72,8 @@ namespace src
 
             app.UseRouting();
             app.UseCors("CorsPolicy");
+            app.UseStaticFiles();
             //app.UseAuthentication();
-            //app.UseMvc();
             //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
