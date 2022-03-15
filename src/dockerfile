@@ -23,6 +23,8 @@ ENTRYPOINT ["dotnet", "src.dll"]
 #docker pull r3soares/api-imetro:alpha1
 #Comando para rodar o dock
 #docker run -d -p 29080:80 r3soares/api-imetro:alpha1
+#Com Volume associado
+#docker run -d -p 29080:80 -v databases:/app/Databases r3soares/api-imetro:alpha1
 
 #FROM mcr.microsoft.com/dotnet/aspnet:6.0
 #COPY bin/Release/net6.0/publish/ App/
