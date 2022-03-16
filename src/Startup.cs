@@ -72,7 +72,7 @@ namespace src
 
             app.UseRouting();
             app.UseCors("CorsPolicy");
-            app.UseStaticFiles();
+            //app.UseStaticFiles();
             //app.UseAuthentication();
             //app.UseAuthorization();
 
