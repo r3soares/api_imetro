@@ -16,15 +16,15 @@ COPY --from=build /app .
 ENTRYPOINT ["dotnet", "src.dll"]
 
 #Comando utilizado para criar docker acima
-#docker build -t r3soares/api-imetro:alpha1 -f dockerfile .
+#docker build -t r3soares/api-i:alpha1 -f dockerfile .
 #Comando para enviar o docker para o repositório
-#docker push r3soares/api-imetro:alpha1
+#docker push r3soares/api-i:alpha1
 #Comando para pegar o docker do repositorio
-#docker pull r3soares/api-imetro:alpha1
+#docker pull r3soares/api-i:alpha1
 #Comando para rodar o dock
-#docker run -d -p 29080:80 r3soares/api-imetro:alpha1
+#docker run -d -p 29080:80 r3soares/api-i:alpha1
 #Com Volume associado
-#docker run -d -p 29080:80 -v databases:/app/Databases --name api --network imetro-net --network-alias api r3soares/api-imetro:alpha1
+#docker run -d -p 29080:80 -v databases:/app/Databases --name api --network i-net --network-alias api r3soares/api-i:alpha1
 
 #FROM mcr.microsoft.com/dotnet/aspnet:6.0
 #COPY bin/Release/net6.0/publish/ App/
