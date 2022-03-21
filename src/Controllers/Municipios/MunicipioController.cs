@@ -30,7 +30,7 @@ namespace src.Controllers.Vtr
         public async Task<IActionResult> Get()
         {
             var result = await _repo.GetAll();
-            return result.Any() ? Ok(result) : new EmptyResult();
+            return result.Any() ? Ok(result) : StatusCode(204);
         }
 
         // GET api/<AgendaController>/5
