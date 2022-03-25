@@ -54,6 +54,7 @@ namespace src
             //}
             services.AddSingleton(typeof(IVtrRepository<>), typeof(VtrRepository<>));
             services.AddSingleton(typeof(IMunicipiosRepository), typeof(MunicipiosRepository));
+            services.AddSingleton(typeof(IServicosVtrRepository), typeof(ServicosVtrRepository));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
