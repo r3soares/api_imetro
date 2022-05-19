@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using Realms;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace src.Domain.Models.Vtr
 {
@@ -23,6 +24,9 @@ namespace src.Domain.Models.Vtr
         public int Status { get; set; }
         [JsonProperty]
         public string Obs { get; set; }
+
+        [Backlink(nameof(Responsavel.Empresa))]
+        public IQueryable<Responsavel> Responsaveis { get;}
     }
 
 }
