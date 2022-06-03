@@ -16,7 +16,9 @@ public class Responsavel : RealmObject
     [JsonProperty]
     public string Email { get; set; }
     [JsonProperty]
-    public Empresa Empresa { get; set; }
+    public string Empresa { get; set; }
+    [JsonProperty]
+    public string Obs { get; set; }
 
     public static string GetNovoID => Guid.NewGuid().ToString();
 }

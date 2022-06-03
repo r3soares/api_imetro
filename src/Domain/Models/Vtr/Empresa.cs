@@ -24,9 +24,6 @@ namespace src.Domain.Models.Vtr
         public int Status { get; set; }
         [JsonProperty]
         public string Obs { get; set; }
-
-        [Backlink(nameof(Responsavel.Empresa))]
-        public IQueryable<Responsavel> Responsaveis { get;}
     }
 
 }
