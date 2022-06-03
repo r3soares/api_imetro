@@ -14,6 +14,12 @@ namespace src.Domain.Models.Vtr
         [JsonProperty]
         public DateTimeOffset DataRegistro { get; set; }
 
+        [JsonProperty]
+        public DateTimeOffset? DataInicio { get; set; }
+
+        [JsonProperty]
+        public DateTimeOffset? DataFim { get; set; }
+
         /// <summary>
         /// Se houver bitrem, o mesmo será associado a agenda do outro veículo
         /// </summary>
