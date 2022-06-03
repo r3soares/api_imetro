@@ -50,6 +50,18 @@ namespace src.Controllers.Vtr
             return t.Any() ? Ok(t) : NotFound();
         }
 
+        [HttpGet("agendados")]
+        public async Task<IActionResult> GetAgendados()
+        {
+            var t = await _repo.GetAll();
+            if (t.Any())
+            {
+                var agendados = t.Where(tAgendado => tAgendado.Agenda != null);
+                return agendados != null ? Ok(agendados) : NotFound();
+            }
+            return t.Any() ? Ok(t) : NotFound();
+        }
+
         [HttpPost("lista")]
         public async Task<IActionResult> GetFromList([FromBody] List<string> ids)
         {
