@@ -38,23 +38,24 @@ namespace src.Controllers.Vtr
         }
         
 
-        // GET api/<EmpresaController>/5
-        [HttpGet("{nome}")]
-        public async Task<IActionResult> Get(string nome)
-        {
-            var t = await _repo.GetById(nome);
-            return t != null ? Ok(t) : NotFound();
-        }
+        //// GET api/<EmpresaController>/5
+        //[HttpGet("{nome}")]
+        //public async Task<IActionResult> Get(string nome)
+        //{
+        //    var t = await _repo.GetById(nome);
+        //    return t != null ? Ok(t) : NotFound();
+        //}
 
         [HttpGet("novo")]
         public IActionResult GetNovoID()
         {
-            return Ok(Responsavel.GetNovoID);
+            return Created("", Responsavel.GetNovoID);
         }
 
         [HttpGet("nomeParcial/{nome}")]
         public async Task<IActionResult> GetByNomeParcial(string nome)
         {
+            nome = nome.Replace("|", "");
             var t = await _repo.GetAll();
             if (t.Any())
             {
