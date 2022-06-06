@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using Realms;
 using System;
+using System.Collections.Generic;
 
 namespace src.Domain.Models.Vtr
 {
@@ -42,10 +43,13 @@ namespace src.Domain.Models.Vtr
         public Tanque Tanque { get; set; }
 
         [JsonProperty]
-        public int StatusConfirmacao { get; set; }
+        public int StatusConfirmacao => StatusGenerico[0];
 
         [JsonProperty]
-        public int StatusPagamento { get; set; }
+        public int StatusPagamento => StatusGenerico[1];
+
+        [JsonProperty]
+        public IList<int> StatusGenerico { get;} = new List<int>(new int[] { 0, 0, 0 });
 
         [JsonProperty]
         public string AgendaAnterior { get; set; }
