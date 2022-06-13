@@ -42,14 +42,14 @@ namespace src.Domain.Models.Vtr
         [JsonProperty]
         public Tanque Tanque { get; set; }
 
-        [JsonProperty]
-        public int StatusConfirmacao => StatusGenerico[0];
+        //[JsonProperty]
+        public long StatusConfirmacao => StatusGenerico.Count > 0 ? StatusGenerico[0] : -1;
+
+        //[JsonProperty]
+        public long StatusPagamento => StatusGenerico.Count > 1 ? StatusGenerico[1] : -1;
 
         [JsonProperty]
-        public int StatusPagamento => StatusGenerico[1];
-
-        [JsonProperty]
-        public IList<int> StatusGenerico { get;} = new List<int>(new int[] { 0, 0, 0 });
+        public IList<long> StatusGenerico { get;}
 
         [JsonProperty]
         public string AgendaAnterior { get; set; }

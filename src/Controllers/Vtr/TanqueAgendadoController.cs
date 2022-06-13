@@ -44,10 +44,17 @@ namespace src.Controllers.Vtr
             var t = await _repo.GetAll();
             if (t.Any())
             {
-                var pendentes = t.Where(tAgendado => tAgendado.StatusConfirmacao == 0);
-                return pendentes != null ? Ok(pendentes) : NotFound();
+                var pendentes = new List<TanqueAgendado>();
+                foreach (var ta in t)
+                {
+                    if (ta.StatusConfirmacao == 0)
+                    {
+                        pendentes.Add(ta);
+                    }
+                }
+                return pendentes.Any() ? Ok(pendentes) : NotFound();
             }
-            return t.Any() ? Ok(t) : NotFound();
+            return NotFound();
         }
 
         [HttpGet("agendados")]
