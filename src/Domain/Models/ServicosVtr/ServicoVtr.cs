@@ -1,9 +1,11 @@
 
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Newtonsoft.Json;
 using Realms;
 
 namespace src.Domain.Models.ServicosVtr
 {
+    [ValidateNever]
     [JsonObject(MemberSerialization.OptIn)]
     public class ServicoVtr : EmbeddedObject
     {

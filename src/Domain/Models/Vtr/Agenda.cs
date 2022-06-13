@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Newtonsoft.Json;
 using Realms;
 using System;
@@ -5,6 +6,7 @@ using System.Collections.Generic;
 
 namespace src.Domain.Models.Vtr
 {
+    [ValidateNever]
     [JsonObject(MemberSerialization.OptIn)]
     public class Agenda : RealmObject
     {

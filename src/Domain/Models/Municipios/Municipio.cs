@@ -1,8 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Newtonsoft.Json;
 using Realms;
 
 namespace src.Domain.Models.Municipios
 {
+    [ValidateNever]
     [JsonObject(MemberSerialization.OptIn)]
     public class Municipio : RealmObject
     {

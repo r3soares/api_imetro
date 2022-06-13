@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Newtonsoft.Json;
 
 namespace src.Domain.Models.Vtr
 {
+    [ValidateNever]
     [JsonObject(MemberSerialization.OptIn)]
     public class Compartimento : Realms.EmbeddedObject
     {

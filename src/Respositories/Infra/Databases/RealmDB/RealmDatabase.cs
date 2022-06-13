@@ -31,7 +31,7 @@ namespace src.Respositories.Infra.Databases.RealmDB
             var realm = await Database();
             try
             {
-                await realm.WriteAsync((r) => r.Remove(data));
+                await realm.WriteAsync(() => realm.Remove(data));
                 return true;
             }
             catch
@@ -61,7 +61,7 @@ namespace src.Respositories.Infra.Databases.RealmDB
             var realm = await Database();
             try
             {
-                await realm.WriteAsync((r) => r.Add(data, true));
+                await realm.WriteAsync(() => realm.Add(data, true));
                 return true;
             }
             catch
@@ -77,7 +77,7 @@ namespace src.Respositories.Infra.Databases.RealmDB
             var realm = await Database();
             try
             {
-                await realm.WriteAsync((r) => r.Add(data, true));
+                await realm.WriteAsync(() => realm.Add(data, true));
                 return true;
             }
             catch

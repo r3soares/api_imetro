@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Newtonsoft.Json;
 using Realms;
 
 namespace src.Domain.Models.ServicosVtr
 {
+    [ValidateNever]
     [JsonObject(MemberSerialization.OptIn)]
     public class TabelaServicos : RealmObject
     {
