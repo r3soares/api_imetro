@@ -14,6 +14,7 @@ namespace src.Domain.Models.Vtr
         [JsonProperty]
         public string ID { get; set; }
         [Indexed]
+        [JsonProperty]
         public string Nome { get; set; }
         [JsonProperty]
         public string Telefone { get; set; }

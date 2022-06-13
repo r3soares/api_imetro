@@ -52,7 +52,7 @@ namespace src.Controllers.Vtr
                 bool valido = DateTimeOffset.TryParse(inicioFim[0], out var inicio) &
                 DateTimeOffset.TryParse(inicioFim[1], out var fim);
                 if (!valido) return BadRequest(periodo);
-                var agendas = t.Where(agenda => agenda.D >= inicio.Date && agenda.D <= fim.Date);
+                var agendas = t.Where(agenda => agenda.D >= inicio && agenda.D <= fim);
                 return agendas != null ? Ok(agendas) : NotFound();
             }
             return t.Any() ? Ok(t) : NotFound();
