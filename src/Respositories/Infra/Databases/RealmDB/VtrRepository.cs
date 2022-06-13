@@ -1,4 +1,5 @@
 ﻿using Realms;
+using src.Domain.Models.Vtr;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,7 +12,11 @@ namespace src.Respositories.Infra.Databases.RealmDB
         private readonly IRepository<T> _repository;
         public VtrRepository()
         {
-            _repository = new RealmDatabase<T>("vtr.realm", PERSISTENCIA_BANCO);
+            _repository = new RealmDatabase<T>(
+                "vtr.realm",
+                new[] { typeof(Agenda), typeof(Compartimento), typeof(Empresa), typeof(Proprietario),
+                        typeof(Responsavel), typeof(Tanque), typeof(TanqueAgendado)},
+                PERSISTENCIA_BANCO);
         }
 
         public async Task<object> Delete(object id)

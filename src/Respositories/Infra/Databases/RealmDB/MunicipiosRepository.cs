@@ -9,7 +9,7 @@ namespace src.Respositories.Infra.Databases.RealmDB
         private readonly IRepository<Municipio> _repository;
         public MunicipiosRepository()
         {
-            _repository = new RealmDatabase<Municipio>("municipios.realm");
+            _repository = new RealmDatabase<Municipio>("municipios.realm", new[] { typeof(Municipio), typeof(Estado) });
         }
 
         public async Task<object> Delete(object id)

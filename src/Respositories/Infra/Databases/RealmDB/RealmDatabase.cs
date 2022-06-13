@@ -1,4 +1,5 @@
 ﻿using Realms;
+using Realms.Schema;
 using System;
 using System.IO;
 using System.Linq;
@@ -13,12 +14,13 @@ namespace src.Respositories.Infra.Databases.RealmDB
         static bool isCompactado = false;
         private readonly RealmConfigurationBase _configuration;
         private async Task<Realm> Database() { return await Realm.GetInstanceAsync(_configuration); }
-        public RealmDatabase(string databaseName, bool persist = true)
+        public RealmDatabase(string databaseName, Type[] classesSchema, bool persist = true)
         {
             string folder = Path.Combine(Directory.GetCurrentDirectory(), "Databases");
             string path = Path.Combine(folder, databaseName);
             Directory.CreateDirectory(folder);
             _configuration = persist ? new RealmConfiguration(path) : new InMemoryConfiguration(databaseName);
+            _configuration.Schema = classesSchema;
             if (!isCompactado && persist)
             {
                 isCompactado = Realm.Compact(_configuration);

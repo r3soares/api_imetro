@@ -11,7 +11,10 @@ namespace src.Respositories.Infra.Databases.RealmDB
         private readonly IRepository<TabelaServicos> _repository;
         public ServicosVtrRepository()
         {
-            _repository = new RealmDatabase<TabelaServicos>("servicos_vtr.realm", PERSISTENCIA_BANCO);
+            _repository = new RealmDatabase<TabelaServicos>(
+                "servicos_vtr.realm",
+                new[] {typeof(ServicoVtr), typeof(TabelaServicos) }, 
+                PERSISTENCIA_BANCO);
         }
 
         public async Task<object> Delete(object id)
