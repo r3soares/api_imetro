@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Newtonsoft.Json;
 using Realms;
@@ -15,13 +16,15 @@ namespace src.Domain.Models.Vtr
         public string ID { get; set; }
         [Indexed]
         [JsonProperty]
-        public string Nome { get; set; }
+        public string Apelido { get; set; }
         [JsonProperty]
-        public string Telefone { get; set; }
+        public IList<string> Telefones { get; }
         [JsonProperty]
-        public string Email { get; set; }
+        public IList<string> Emails { get; }
         [JsonProperty]
-        public string Empresa { get; set; }
+        public string ApelidoEmpresa { get; set; }
+        [JsonProperty]
+        public string CNPJ_CPF { get; set; }
         [JsonProperty]
         public string Obs { get; set; }
 

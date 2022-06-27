@@ -59,7 +59,7 @@ namespace src.Controllers.Vtr
             var t = await _repo.GetAll();
             if (t.Any())
             {
-                var responsaveis = t.Where(e => e.Nome.StartsWith(nome, StringComparison.OrdinalIgnoreCase));
+                var responsaveis = t.Where(e => e.Apelido.StartsWith(nome, StringComparison.OrdinalIgnoreCase));
                 return responsaveis != null ? Ok(responsaveis) : NotFound();
             }
             return t.Any() ? Ok(t) : NotFound();

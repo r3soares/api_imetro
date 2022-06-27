@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Realms;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace src.Domain.Models.Vtr
 {
@@ -56,8 +57,52 @@ namespace src.Domain.Models.Vtr
         [JsonProperty]
         public string AgendaAnterior { get; set; }
 
+        //[JsonProperty]
+        //public Empresa Responsavel { get; set; }
+
+        private IDictionary<string, string> responsavel { get; }
+
         [JsonProperty]
-        public Empresa Responsavel { get; set; }
+        public Responsavel Responsavel 
+        {
+            get
+            {
+                if (!responsavel.Any())
+                    return null;
+
+                var r = new Responsavel()
+                {
+                    Apelido = responsavel["apelido"],
+                    ApelidoEmpresa = responsavel["apelidoEmpresa"],
+                    CNPJ_CPF = responsavel["cnpj_cpf"],
+                    ID = responsavel["id"],
+                    Obs = responsavel["obs"],
+                };
+
+                var emails = responsavel["emails"].Split(";");
+                foreach (var i in emails)
+                {
+                    r.Emails.Add(i);
+                }
+                var telefones = responsavel["telefones"].Split(";");
+                foreach (var i in telefones)
+                {
+                    r.Telefones.Add(i);
+                }
+
+                return r;
+            }
+            set
+            {
+                responsavel["apelido"] = value.Apelido;
+                responsavel["apelidoEmpresa"] = value.ApelidoEmpresa;
+                responsavel["cnpj_cpf"] = value.CNPJ_CPF;
+                responsavel["id"] = value.ID;
+                responsavel["obs"] = value.Obs;
+                responsavel["emails"] = String.Join(';', value.Emails);
+                responsavel["telefones"] = String.Join(';', value.Telefones);
+            }
+        }
 
         [JsonProperty]
         public double CustoVerificacao { get; set; }
