@@ -41,6 +41,7 @@ namespace src.Domain.Models.Vtr
         /// </summary>
         [JsonProperty]
         public string Agenda { get; set; }
+        
 
         [JsonProperty]
         public Tanque Tanque { get; set; }
@@ -57,52 +58,52 @@ namespace src.Domain.Models.Vtr
         [JsonProperty]
         public string AgendaAnterior { get; set; }
 
-        //[JsonProperty]
-        //public Empresa Responsavel { get; set; }
-
-        private IDictionary<string, string> responsavel { get; }
-
         [JsonProperty]
-        public Responsavel Responsavel 
-        {
-            get
-            {
-                if (!responsavel.Any())
-                    return null;
+        public Responsavel Responsavel { get; set; }
 
-                var r = new Responsavel()
-                {
-                    Apelido = responsavel["apelido"],
-                    ApelidoEmpresa = responsavel["apelidoEmpresa"],
-                    CNPJ_CPF = responsavel["cnpj_cpf"],
-                    ID = responsavel["id"],
-                    Obs = responsavel["obs"],
-                };
+        //private IDictionary<string, string> responsavel { get; }
 
-                var emails = responsavel["emails"].Split(";");
-                foreach (var i in emails)
-                {
-                    r.Emails.Add(i);
-                }
-                var telefones = responsavel["telefones"].Split(";");
-                foreach (var i in telefones)
-                {
-                    r.Telefones.Add(i);
-                }
+        //[JsonProperty]
+        //public Responsavel Responsavel 
+        //{
+        //    get
+        //    {
+        //        if (!responsavel.Any())
+        //            return null;
 
-                return r;
-            }
-            set
-            {
-                responsavel["apelido"] = value.Apelido;
-                responsavel["apelidoEmpresa"] = value.ApelidoEmpresa;
-                responsavel["cnpj_cpf"] = value.CNPJ_CPF;
-                responsavel["id"] = value.ID;
-                responsavel["obs"] = value.Obs;
-                responsavel["emails"] = String.Join(';', value.Emails);
-                responsavel["telefones"] = String.Join(';', value.Telefones);
-            }
-        }
+        //        var r = new Responsavel()
+        //        {
+        //            Apelido = responsavel["apelido"],
+        //            ApelidoEmpresa = responsavel["apelidoEmpresa"],
+        //            CNPJ_CPF = responsavel["cnpj_cpf"],
+        //            ID = responsavel["id"],
+        //            Obs = responsavel["obs"],
+        //        };
+
+        //        var emails = responsavel["emails"].Split(";");
+        //        foreach (var i in emails)
+        //        {
+        //            r.Emails.Add(i);
+        //        }
+        //        var telefones = responsavel["telefones"].Split(";");
+        //        foreach (var i in telefones)
+        //        {
+        //            r.Telefones.Add(i);
+        //        }
+
+        //        return r;
+        //    }
+        //    set
+        //    {
+        //        responsavel["apelido"] = value.Apelido;
+        //        responsavel["apelidoEmpresa"] = value.ApelidoEmpresa;
+        //        responsavel["cnpj_cpf"] = value.CNPJ_CPF;
+        //        responsavel["id"] = value.ID;
+        //        responsavel["obs"] = value.Obs;
+        //        responsavel["emails"] = String.Join(';', value.Emails);
+        //        responsavel["telefones"] = String.Join(';', value.Telefones);
+        //    }
+        //}
 
         [JsonProperty]
         public double CustoVerificacao { get; set; }

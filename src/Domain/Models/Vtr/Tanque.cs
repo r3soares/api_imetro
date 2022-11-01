@@ -31,7 +31,7 @@ namespace src.Domain.Models.Vtr
         [JsonProperty]
         public IList<string> LinkDocs { get; }
         [JsonProperty]
-        public string Obs { get; }
+        public string Obs { get; set; }
 
         [Backlink(nameof(TanqueAgendado.Tanque))]
         public IQueryable<TanqueAgendado> Historico { get; }
